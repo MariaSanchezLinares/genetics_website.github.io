@@ -1,0 +1,65 @@
+---
+title: "GWAS Methods"
+format: html
+---
+
+An alternative to the $p > n$ when fitting a multiple linear regression model for conducting GWAS is a **marginal regression**
+
+## Marginal Regression Approach
+
+$$
+E[y | x_j] = \beta_0 + \beta_{1j} x_j
+$$
+
+where:
+
+-   $y$ is the trait,
+-   $x_j$ is the number of minor alleles at position $j$,
+-   This is repeated for all positions $j = 1, \dots, m$.
+
+With this approach we analyze all predictor variables **one-by-one**, and based on this we can conduct hypothesis testing.
+
+::: {.callout-tip title="Note!"}
+There are other types of hypothesis test that could be conducted (i.e.trend test, genotypic test) but they all rely on the a similar idea of testing the association between each SNP and the disease/trait, recording the p-value, and repeating for all SNPs 
+:::
+
+## Hypothesis Testing
+
+The goal of hypothesis testing is to discern between two potential theories. For a regression model we test: 
+
+- Null hypothesis (H0): meaning our predictor has/causes no effect/relationship/difference on our outcome variable $$H_0: ꞵ1_j = 0 $$\
+- Alternative hypothesis (HA): when our predictor has/causes an effect/relationship/difference. $$H_1: ꞵ_1j ≠ 0$$
+
+To perform this test we must:
+
+1.  State the hypotheses
+
+2.  Select a significance threshold
+
+3.  Calculate a test statistic
+
+4.  Calculate the corresponding p-value
+
+5.  Make a decision (reject $H_0$ if p-value $\leq \alpha$, fail to reject $H_0$ if p-value $> \alpha$ )
+
+Now that we know how to perform a hypothesis test, it's important to consider the potential errors that can arise from this process
+
+### Errors
+
+In hypothesis testing, $\alpha$ represents the significance level, which is the probability of rejecting the null hypothesis when it is actually true. We call this a type I error. Therefore, we choose $\alpha$ based on how comfortable we are with making a T1E. See below the different scenarios after we have made a decision about our test: 
+
+<img src="errors.png" width="600px" style="border-radius: 20px;"/>
+
+Back to our original question: *what SNPs are associated with a specific disease/trait of interest?* It can be difficult to keep track of our results when we have hundreds of thousands of p-values to keep track of, this is where Manhattan plots come in!
+
+## Manhattan Plots
+
+To make sense of the vast number of p-values generated in a GWAS, we need a clear and interpretable way to visualize our results. Manhattan plots provide an intuitive way to identify genetic variants (SNPs) that are significantly associated with a trait by displaying p-values across the genome in a structured format. Below is an example of a Manhattan plot:
+
+<img src="manhattan.png" width="600px" style="border-radius: 20px;"/>
+
+Continue to the next section [GWAS Implementation](gwas_implementation.qmd){target=_blank} to learn more about how you can conduct a GWAS and create your own Manhattan plot! 
+
+
+
+

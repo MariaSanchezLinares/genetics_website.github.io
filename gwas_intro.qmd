@@ -1,0 +1,163 @@
+---
+title: "GWAS: Genome-Wide Asssociation Studies"
+format:
+  html:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+GWAS is used to determine which genetics variants are associated a specific trait of interest
+
+### What is a genetic variant?
+
+A genetic variant is a **difference in the DNA sequence** that occurs in the \~1% of the genome that varies among individuals, distinguishing one person’s genetic makeup from another’s.
+
+::: {.callout-tip title="Some more genetics vocab"}
+There are multiple types of genetic variants. One common type are **single nucleotide variants (SNVs)**, where a single nucleotide differs at a specific position (e.g., A vs. G). For a given SNV, we refer to the different possible nucleotides at said position as alleles.
+
+Each possible nucleotide at that position is called an allele, with the more common one referred to as the major allele and the less common one as the minor allele. If the *minor allele frequency (MAF) is at least 1%,* the variant is classified instead as a **single nucleotide polymorphism (SNP)**.
+:::
+
+## GWAS Models
+
+A GWAS models looks like this:
+
+$$E[\mathbf{y} \mid x] = \boldsymbol\beta_0 + \boldsymbol\beta_1 x$$
+
+Where:
+
+-   $y$ is the trait of interest and,
+
+-   $x$ the **number of minor alleles**
+
+For example, if we designated G to be our minor allele we would represent this as shown below:
+
+| Person   | Allele 1 | Allele 2 | Minor Allele Count | Trait |
+|----------|----------|----------|--------------------|-------|
+| Person 1 | A        | A        | 0                  | 60    |
+| Person 2 | A        | G        | 1                  | 67    |
+| Person 3 | G        | A        | 1                  | 68    |
+| ...      | ...      | ...      | ...                | ...   |
+
+In practice however, we look at many genetics variants at a time. A single human DNA sequence consists of \~3 Billion nucleotides (A's, C's, T's, G's). We will not actually measure each one of these possibles positions in the sequence, but rather hundred thousands or even millions.
+
+This means that our data will more like this:
+
+| **Individual** | **Var 1** | **Var 2** | **Var 3** | **Var 4** | **Var 5** | **Var p** | **Trait** |
+|---------|---------|---------|---------|---------|---------|---------|---------|
+| Person 1 | 0 | 0 | 0 | 0 | 1 | 1 | 60 |
+| Person 2 | 1 | 0 | 1 | 0 | 1 | 1 | 67 |
+| Person 3 | 1 | 0 | 0 | 1 | 0 | 0 | 68 |
+| ... | ... | ... | ... | ... | ... | ... | ... |
+
+## p \> n problem
+
+When working with genetic data, one big challenge is that there are way more genetic variants (columns) than there are people (rows) in the our dataset. This is known as the $p > n$ problem, when the number of variables (p) is greater than the number of observations (n).
+
+### Let's explore this with a synthetic dataset!
+
+We can start by generating an example of *big* genetic *data* that simulates genetic variants. We will call these *SNPs* (Single Nucleotide Polymorphism), which represent a variation in a single nucleotide.
+
+For this purpose we will first create a function that will help us generate one variant (`do_one`) and then use `replicate` to run that function many times, thus generating many variants.
+
+::: callout-note
+Be aware! In reality, nearby genetic variants are correlated with one another, but we'll ignore that correlation structure for now and just generate *independent* variants.
+:::
+
+Our function will take two parameters:
+
+-   *MAF:* or minor allele frequency, which refers to how often the less common allele appears in the population.
+
+-   *n_ppl:* which will be the number of people in the dataset (units of observation)
+
+Note: p tells our function the probability of a minor allele appearing in our data
+
+```{r}
+# function to simulate one genetic variant
+do_one <- function(n_ppl, MAF){
+  snp <- rbinom(n = n_ppl, size = 2, p = MAF)
+  return(snp)
+}
+```
+
+Now, we will use the `replicate` function to run `do_one` 1000 times, creating an dataset with *100 individuals* and *1000 SNPs*
+
+```{r simulate-many-variants}
+# replicate 1000 times to create 1000 variants
+set.seed(494)
+snps <- replicate(1000, do_one(n_ppl = 100, MAF = 0.1))
+```
+
+Now that we have dataset wot work with we can add a trait. We will create a trait that is not associated to any genetic variant, a *null trait*. We can do this using the `rnorm` function to randomly sample from a normal distribution:
+
+```{r simulate-null-trait}
+set.seed(494) # set seed for reproducibility
+y <- rnorm(100, mean = 65, sd = 3) # generate trait
+```
+
+At this point, we combine together our simulated SNPs and trait into a single data frame:
+
+```{r combine-into-dataset}
+dat <- as.data.frame(cbind(y, snps))
+```
+
+Now that we have an example of big data we are ready to explore the association between a given trait an our genetic variants. But, what would happen if we tried to fit our data into a multiple linear regression model?
+
+```{r attempt-multiple-regression}
+model <- lm(y ~ ., data = dat)
+```
+
+If we zoom into our model we would find the following:
+
+<img src="coefficients.png" width="800px" style="border-radius: 20px;"/>
+
+After the 100th $\beta$ our model stops predicting coefficients, because **we can't estimate more coefficients than we have observations.** But why does this happen?
+
+## Theory of Linear Models
+
+In fitting a linear regression model, our goal is to find the line that provides the "best" fit to our data. More specifically, we hope to find the values of the parameters $\beta_0, \beta_1, \beta_2, \dots$ that minimize the sum of squared residuals:
+
+<img src="residuals.png" width="350px" style="border-radius: 20px;"/>
+
+However, deriving the least squares and maximum likelihood estimates for can be more difficult when we consider a multiple linear regression models with many explanatory variables. Consider:
+
+$$E[y | x_1, x_2, ..., x_p] = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots \beta_p x_p.$$ In this case, it's useful to formulate our linear regression model using vectors and matrices.
+
+Where:
+
+-   $\mathbf{y}$ is an $n\times 1$ vector of outcomes (trait values),
+
+$$\mathbf{y} = \begin{pmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{pmatrix}$$
+
+-   $\mathbf{X}$ is an $n \times p$ matrix of predictors (genetic variants in our case), and
+
+$$\mathbf{X} = \begin{pmatrix} 1 & x_{11} & \cdots & x_{p1} \\ 1 & x_{12} & \cdots & x_{p2} \\ \vdots & \vdots & \ddots & \vdots \\ 1 & x_{1n} & \cdots & x_{pn} \end{pmatrix}$$
+
+-   $\mathbf{\beta}$ is a $p \times 1$ vector of coefficients to be estimated (covariates).
+
+$$\boldsymbol\beta = \begin{pmatrix} \beta_0 \\ \beta_1 \\ \vdots \\ \beta_p \end{pmatrix}$$
+
+Then we can write our linear regression model as:
+
+$$
+\begin{aligned}
+E[\mathbf{Y} \mid \mathbf{X}] = \boldsymbol\beta_0 + \boldsymbol\beta_1 \mathbf{X}  \rightarrow
+\mathbf{X} \beta = \begin{pmatrix} 
+(1 \cdot \beta_0 ) + (x_{11} \cdot \beta_1) + \cdots + (x_{p1} \cdot \beta_p) \\ 
+(1  \cdot \beta_0) + ( x_{12} \cdot \beta_1) + \cdots + (x_{p2} \cdot \beta_p) \\ 
+\vdots  \\ 
+(1  \cdot \beta_0) + ( x_{1n} \cdot \beta_1) + \cdots + (x_{pn} \cdot \beta_p) 
+\end{pmatrix}
+\end{aligned}
+$$
+
+In this context, the ordinary least squares (OLS) solution for estimating will be given by:
+
+$$\hat{\boldsymbol\beta} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y}$$
+
+However, for this solution to exist, the matrix must be *invertible.* This requires $\mathbf{X}^T \mathbf{X}$ to be full rank (for all columns to be linearly independent), which is only possible if $p \leq n$.
+
+We will dive deeper into how to deal with this problem later on!

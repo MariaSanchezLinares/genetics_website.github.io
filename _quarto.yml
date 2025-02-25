@@ -1,0 +1,39 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Statistical Genetics"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: Intro to Genomics
+      - text: GWAS
+        menu:
+          - href: gwas_intro.qmd
+            text: Intro to GWAS
+          - href: gwas_methods.qmd
+            text: GWAS Methods
+          - href: gwas_implementation.qmd
+            text: GWAS Implementation
+      - href: multiple_testing.qmd 
+        text: Multiple Testing  
+        
+  page-footer:
+    left: |
+      &copy; By Maria Celeste Sanchez Linares, 2025<br>
+      All content licensed under <i class='bi-badge-cc'></i>
+      [(CC BY-NC-SA 4.0)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
+    right: |
+      Site built with <a href='https://quarto.org/'>Quarto</a>
+
+format:
+  html:
+    theme: lux
+    css: styles.css
+    toc: true
+
+editor: visual
+

@@ -1,0 +1,329 @@
+---
+title: "GWAS Implementation"
+format: html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, error = TRUE)
+library(survival)
+library(Matrix)
+library(snpStats)
+```
+
+In this section we will learn how to perform a Genome-Wide Association study in R using marginal regression, and how to visualize our results using Manhattan plots. 
+
+### Preparation
+
+To prepare for this task you will need to install (or update) the following packages:
+
+```{r load-packages}
+#| message: false
+library(tidyverse)
+library(broom)
+library(qqman)
+library(RColorBrewer)
+```
+
+We will also need the `snpStats`. The installation process for the package is slightly different:
+
+```{r install-from-bioconductor}
+#| eval: false
+
+# installing the package
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("snpStats")
+
+# load the snpStats package
+library(snpStats)
+```
+
+
+## Data: exploration and prep
+
+We will be using real genotype data and a simulated binary phenotype from the International HapMap Project, specifically from 165 individuals.The data only includes individuals from Utah with Northern and Western European ancestry (the "CEU" population).
+
+The data is available in the *PLINK format* and are stored in three files:
+
+- `.bed` – genotype information
+- `.fam` – individual-level information
+- `.bim` – SNP details
+
+::: callout-note!
+`PLINK` is a tool for analyzing genetic data and conducting GWAS. Learn more [here](https://www.cog-genomics.org/plink/). We’re going to be conducting our GWAS "by hand", but in practice most people use `PLINK` or other software programs instead. 
+:::
+
+We can use the `read.plink` function in the `snpStats` package to read these data into R. 
+
+```{r file-paths}
+# update file paths
+gwas.dir <- './1_QC_GWAS/HapMap_3_r3_1'
+
+bed <- paste0(gwas.dir, '.bed')
+bim <- paste0(gwas.dir, '.bim')
+fam <- paste0(gwas.dir, '.fam')
+```
+
+
+```{r read-data}
+#| cache: true
+# NOTE: this might take a minute or two
+hapmap <- snpStats::read.plink(bed, bim, fam)
+
+```
+
+### Understanding the data
+
+The `hapmap` data object we have created is a "list" containing the three items described above. 
+
+```{r explore-data}
+class(hapmap)
+names(hapmap)
+```
+
+The dataset contains 165 people and 1,457,897 SNPs
+
+```{r}
+dim(hapmap$genotypes)
+```
+
+
+But what do we know about each individual? The `fam` file keeps track of information about each of the people in our study, see a glossary below:
+
+```{r explore-sample-info}
+head(hapmap$fam)
+```
+
+-   `pedigree`: the family ID number, ie the ID of the family, or "pedigree", to which this individual belongs
+-   `member`: the individual ID number 
+-   `father`: the ID of the individual's father, if known **and** present in this sample (`NA` otherwise)
+-   `mother`: the ID of the individual's mother, if known and present in this sample (`NA` otherwise)
+-   `sex`: binary sex (`1` = male, `2` = female, `0` = unknown)
+-   `affected`: a binary simulated phenotype (`1` = control, `2` = case)
+
+The `.map` file contains information about the different SNPs: 
+
+```{r explore-snp-info}
+head(hapmap$map)
+```
+
+-   `chromosome`: the chromosome on which the SNP resides
+-   `snp.name`: the name of the SNP (commonly referred to as the "rsID")
+-   `cM`: or *centiMorgans*; how far about SNPs are from one another along the genome, also known as "genetic distance"
+-   `position`: physical (base pair) distance, position of the SNP (e.g., position = 1 would be the very first nucleotide in our DNA sequence)
+-   `allele.1`: one of the alleles at this SNP (according to the `PLINK` documentation, this is *usually* the minor allele)
+-   `allele.2`: other allele at this SNP (according to the `PLINK` documentation, this is *usually* the major allele)
+
+
+### Format data for analysis 
+
+Let's add a minor allele frequencies to our `map` data frame. (This will come in handy later!)
+
+```{r add-MAF-to-SNP-info}
+maf <- col.summary(hapmap$genotypes)$MAF
+
+# add new MAF variable 
+hapmap$map <- hapmap$map %>%
+  mutate(MAF = maf)
+
+# look at SNP info again
+head(hapmap$map)
+```
+
+The `snpstats` package uses a unique format to store data. Currently, genotypes are coded as 01, 02, and 03 (with 00 representing missing values). Let's convert this to the 0, 1, 2 (and NA) format 
+
+```{r reformat-genotypes}
+# what type of object is hapmap$genotypes
+class(hapmap$genotypes)
+
+# convert from "SnpMatrix" to "numeric"
+X <- as(hapmap$genotypes, "numeric")
+
+# what type of object do we have now 
+class(X)
+
+# look at first five rows/columns to confirm conversion looks ok
+X[1:5, 1:5]
+```
+
+You should now see a matrix of 0's, 1's, and 2's!
+
+## Trait Simulation
+
+### Background
+
+For the purpose of this task, we will create artificial data where we already know the "truth," then run a statistical method on it to see how well it performs.Since we designed the data, we can compare the method’s results to the known truth, allowing us to evaluate its accuracy. 
+
+Simulation studies are a widely used technique in statistical research, as they are especially helpful when testing new methods, exploring how they behave in different situations, or comparing multiple approaches. It’s also a great workaround when getting real data can be tricky. 
+
+### Picking a causal SNP
+
+Let's simulate a trait that depends on the SNP known as *rs2476601*. Here's what we know about this SNP: 
+
+```{r look-at-causal-SNP}
+hapmap$map %>%
+  filter(snp.name == 'rs2476601')
+```
+
+### Simulating a quantitative trait
+
+Now, let's create a quantitative trait `y` that depends on your genotype at this SNP plus some random noise. We'll give this SNP an "effect size" of 3: meaning for every additional copy of the minor allele that you carry, your trait value will increase by 3 units (plus or minus some random noise).
+
+```{r simulate-trait}
+# simulate trait
+set.seed(494) # set seed for reproducibility
+n <- nrow(X) # calculate the number of individuals 
+y <- 3 * X[,'rs2476601'] + rnorm(n, 0, 1) # y = 2 * x + e
+
+# look at the first few simulated trait values
+head(y)
+```
+
+Now we know by design that our trait `y` depends on SNP rs10181821! We will use this information later to see how well our methods are working. We'll now refer to rs10181821 as the *causal SNP*. 
+
+## Quality control
+
+Before running our GWAS we should make sure our data is up for the task! 
+
+To start, we need to filter *monomorphic* SNPs. This means meaning everyone has the same genotype, and without variation, we can't estimate an association with a trait. 
+
+Since these SNPs provide no useful information, we’ll remove them by filtering out those with a MAF of zero.
+
+```{r remove-mono-from-map}
+# keep only those SNPs with MAF > 0
+map.clean <- hapmap$map %>%
+  filter(MAF > 0)
+```
+
+**How many SNPs are left after filtering? How many did we remove?**
+
+```{r}
+# check dimensions after filtering
+dim(map.clean)
+
+# compare to original dimensions
+dim(hapmap$map)
+```
+Note we have dropped 174146 SNPs!
+
+Now, let's remove these monomorphic SNPs from our genotype matrix (`X`)
+
+```{r remove-mono-from-genotypes}
+# create vector of which SNPs have a MAF of 0
+monomorphic <- which(maf == 0) 
+head(monomorphic) 
+
+# remove columns in the monomorphic vector
+X.clean <- X[,-monomorphic]
+```
+
+Make sure to confirm that the new "clean" genotype matrix has the correct number of rows and columns before you move on.
+
+```{r check-dimensions}
+dim(X.clean)
+```
+
+::: callout-note
+Today, we're going to restrict our QC to removing monomoprhic SNPs. But note that there are additional QC steps that are normally conducted before GWAS.
+:::
+
+## GWAS
+
+Now, we’re going to loop through each of the SNPs, fitting a linear regression model at each SNP. For each model, we’ll record the estimates (`betas`), standard errors (`ses`), test statistics (`tstats`) and p-values (`pvals`) for the coefficient of interest (the slope).
+
+> This code may take a *long* time to run! 
+
+```{r gwas-all-chrom}
+#| cache: true
+
+# set up empty vectors for storing results
+betas <- c()
+ses <- c()
+tstats <- c()
+pvals <- c()
+
+# loop through all SNPs
+for(i in 1:ncol(X.clean)){
+  # print out occasional updates telling us what SNP we're analyzing
+  if(i %% 10000 == 0) print(paste('Analyzing SNP', i)) 
+  # fit model
+  mod <- lm(y ~ X.clean[,i])
+  # get coefficient information
+  coefinfo <- tidy(mod)
+  # record estimate, SE, test stat, and p-value
+  betas[i] <- coefinfo$estimate[2]
+  ses[i] <- coefinfo$std.error[2]
+  tstats[i] <- coefinfo$statistic[2]
+  pvals[i] <- coefinfo$p.value[2]
+}
+
+```
+
+We need to add our results to our map data frame that contains information about each SNP.
+
+```{r all-results}
+# start with the map info for the chr 1 SNPs
+all.results <- map.clean
+
+# then add betas, SEs, etc.
+all.results <- all.results %>%
+  mutate(Estimate = betas,
+         Std.Error = ses,
+         Test.Statistic = tstats,
+         P.Value = pvals)
+
+# look at results
+head(all.results)
+```
+
+
+## Visualizing Results: Manhattan Plots
+
+We will use the `qqman` package to create a Manhattan plot and visualize our *genome-wide* association results.
+
+```{r}
+#| cache: true
+
+# Identify genome-wide significant SNPs
+sig.snps <- all.results %>%
+  filter(P.Value < 5e-08) %>% 
+  pull(snp.name)
+
+# Generate Manhattan plot
+manhattan(all.results, 
+          chr = "chromosome", 
+          bp = "position", 
+          p = "P.Value", 
+          snp = "snp.name", 
+          ylim = c(0, 10),
+          col = c('darkblue', 'lightblue'),  # change color scheme
+          highlight = sig.snps,          # Highlight significant SNPs
+          genomewideline = -log10(5e-07),# Adjust genome-wide line, we will see how to determine this indicator in future steps 
+          main = "Manhattan Plot of GWAS Results")
+```
+
+We can also created a zoomed-in view for Chromosome 2 to get a closer look at the most significant SNPs
+
+```{r}
+# Zoom into chromosome 1 with annotations
+manhattan(subset(all.results, chromosome == 1), 
+          chr = "chromosome", 
+          bp = "position", 
+          p = "P.Value", 
+          snp = "snp.name", 
+          ylim = c(0, 20),
+          annotatePval = 5e-10, 
+          annotateTop = FALSE,
+          main = "Zoomed-in View: Chromosome 1")
+```
+
+:::callout-note
+
+*Understanding the Y-Axis in a Manhattan Plot*
+
+The **y-axis** in a Manhattan plot represents the **statistical significance** of each SNP’s association with the trait of interest. It is plotted as **$-\log_{10}(p\text{-value})$**, meaning:  
+
+- **Higher points indicate stronger evidence** that the SNP is associated with the trait.  
+- A **low p-value (e.g.,  $10^{-8}$)** translates to a **high $-\log_{10}(p\text{-value})$ value (e.g., 8)**, making it more noticeable in the plot.  
+:::

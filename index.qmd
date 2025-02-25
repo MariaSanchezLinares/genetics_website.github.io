@@ -1,0 +1,16 @@
+---
+title: "Welcome!"
+toc: false
+---
+
+This website was created by Maria Sanchez Linares and presents a summary of what I have learned in my Statistical Genetics course!
+
+##
+
+Here I will walk you through an introduction to genetics background, how to conduct a genome-wide association study in R, multiple testing, genetic ancestry and some of the ethics behind statistical genetics. 
+
+I recommend following along in the order the tabs are presented in the navigation bar.  
+
+<div style="text-align: center;">
+  <img src="index_pic.png" width="600px" style="border-radius: 20px;"/>
+</div>
