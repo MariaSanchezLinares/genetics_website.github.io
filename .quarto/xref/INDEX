@@ -1,0 +1,23 @@
+{
+  "index.qmd": {
+    "index.html": "b97886d6"
+  },
+  "about.qmd": {
+    "about.html": "15591e29"
+  },
+  "gwas.qmd": {
+    "gwas.html": "37936d04"
+  },
+  "multiple_testing.qmd": {
+    "multiple_testing.html": "4cf57f0a"
+  },
+  "gwas_intro.qmd": {
+    "gwas_intro.html": "5b799e1d"
+  },
+  "gwas_methods.qmd": {
+    "gwas_methods.html": "09b54de6"
+  },
+  "gwas_implementation.qmd": {
+    "gwas_implementation.html": "41b97fb9"
+  }
+}

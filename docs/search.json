@@ -1,0 +1,184 @@
+[
+  {
+    "objectID": "multiple_testing.html",
+    "href": "multiple_testing.html",
+    "title": "Multiple Testing: Problems and Solutions",
+    "section": "",
+    "text": "When performing a large number of hypothesis tests, the likelihood of encountering false positives (Type I errors) increases. To address this, we aim to control for multiple testing by maintaining the error rate at an acceptable level. Two commonly used error rates are:\n\nFamily-Wise Error Rate (FWER): The probability of making at least one Type I error across all tests.\n\\[\n\\text{FWER} = P(\\text{at least one Type I error})\n\\]\nA common threshold is 0.05.\nFalse Discovery Rate (FDR): The expected proportion of false discoveries (false positives) among all significant results.\n\\[\n\\text{FDR} = E \\left[ \\frac{FP}{FP + TP} \\right]\n\\]\nA common threshold is also 0.05.\n\nIn both cases, we need to adjust our significance threshold to account for the number of tests conducted."
+  },
+  {
+    "objectID": "multiple_testing.html#the-problem-with-multiple-testing",
+    "href": "multiple_testing.html#the-problem-with-multiple-testing",
+    "title": "Multiple Testing: Problems and Solutions",
+    "section": "",
+    "text": "When performing a large number of hypothesis tests, the likelihood of encountering false positives (Type I errors) increases. To address this, we aim to control for multiple testing by maintaining the error rate at an acceptable level. Two commonly used error rates are:\n\nFamily-Wise Error Rate (FWER): The probability of making at least one Type I error across all tests.\n\\[\n\\text{FWER} = P(\\text{at least one Type I error})\n\\]\nA common threshold is 0.05.\nFalse Discovery Rate (FDR): The expected proportion of false discoveries (false positives) among all significant results.\n\\[\n\\text{FDR} = E \\left[ \\frac{FP}{FP + TP} \\right]\n\\]\nA common threshold is also 0.05.\n\nIn both cases, we need to adjust our significance threshold to account for the number of tests conducted."
+  },
+  {
+    "objectID": "multiple_testing.html#solutions-to-multiple-testing",
+    "href": "multiple_testing.html#solutions-to-multiple-testing",
+    "title": "Multiple Testing: Problems and Solutions",
+    "section": "Solutions to Multiple Testing",
+    "text": "Solutions to Multiple Testing\n\n1. Bonferroni Correction\nOne widely used approach is the Bonferroni Correction, which adjusts the significance threshold by dividing the desired FWER by the number of tests:\n\\[\n\\alpha_{\\text{Bonferroni}} = \\frac{\\text{FWER}}{\\text{# of tests}}\n\\]\nFor example, if we conduct 1 million tests and want to control the FWER at 5%, our new significance threshold would be:\n\\[\\alpha_{\\text{Bonferroni}} = \\frac{0.05}{1,000,000} = 5 \\times 10^{-8}\\]\nPros: Simple and easy to calculate\nCons: Can be overly conservative, especially when tests are correlated (which is often the case in GWAS), reducing power and increasing Type II errors.\n\n\n2. Simulation-Based Approach\nAnother way to control for multiple testing is through simulation-based methods, such as those described in the paper we read for Journal Club 3.\nProcedure:\n\nSimulate a null trait (a trait with no association to any SNPs).\nPerform GWAS on this null trait.\nRecord the smallest p-value from this GWAS.\nRepeat steps 1–3 many times (e.g., 100–1,000 times).\nRank the simulated p-values and determine the 5th percentile threshold.\n\nPros: Works even when tests are correlated\nCons: Computationally expensive"
+  },
+  {
+    "objectID": "multiple_testing.html#independent-vs.-correlated-tests",
+    "href": "multiple_testing.html#independent-vs.-correlated-tests",
+    "title": "Multiple Testing: Problems and Solutions",
+    "section": "Independent vs. Correlated Tests",
+    "text": "Independent vs. Correlated Tests\n\nIndependent Tests\nWhen tests are independent, the probability of at least one Type I error follows:\n\\[\\text{FWER} = 1 - [1 - \\alpha]^{\\text{# of tests}}\\]\nTo control FWER, we need a smaller significance threshold. Both Bonferroni and Simulation-Based approaches work well in this setting and yield similar results.\n\n\nCorrelated Tests\nWhen tests are correlated, the two methods can yield very different thresholds:\n\nBonferroni is too conservative, leading to more Type II errors and lower power.\nA better approach is to adjust for the effective number of independent tests, rather than the total number of tests.\n\nPotential Project Idea: Explore alternative methods for multiple testing correction beyond Bonferroni and simulation-based approaches.\n\n\n\n\n\n\nKey Takeaway\n\n\n\nBy choosing the right multiple testing correction method, we balance Type I errors (false positives) and Type II errors (false negatives) while maintaining statistical power."
+  },
+  {
+    "objectID": "gwas_intro.html",
+    "href": "gwas_intro.html",
+    "title": "GWAS: Genome-Wide Asssociation Studies",
+    "section": "",
+    "text": "GWAS is used to determine which genetics variants are associated a specific trait of interest"
+  },
+  {
+    "objectID": "gwas_intro.html#gwas-models",
+    "href": "gwas_intro.html#gwas-models",
+    "title": "GWAS: Genome-Wide Asssociation Studies",
+    "section": "GWAS Models",
+    "text": "GWAS Models\nA GWAS models looks like this:\n\\[E[\\mathbf{y} \\mid x] = \\boldsymbol\\beta_0 + \\boldsymbol\\beta_1 x\\]\nWhere:\n\n\\(y\\) is the trait of interest and,\n\\(x\\) the number of minor alleles\n\nFor example, if we designated G to be our minor allele we would represent this as shown below:\n\n\n\nPerson\nAllele 1\nAllele 2\nMinor Allele Count\nTrait\n\n\n\n\nPerson 1\nA\nA\n0\n60\n\n\nPerson 2\nA\nG\n1\n67\n\n\nPerson 3\nG\nA\n1\n68\n\n\n…\n…\n…\n…\n…\n\n\n\nIn practice however, we look at many genetics variants at a time. A single human DNA sequence consists of ~3 Billion nucleotides (A’s, C’s, T’s, G’s). We will not actually measure each one of these possibles positions in the sequence, but rather hundred thousands or even millions.\nThis means that our data will more like this:\n\n\n\n\n\n\n\n\n\n\n\n\n\nIndividual\nVar 1\nVar 2\nVar 3\nVar 4\nVar 5\nVar p\nTrait\n\n\n\n\nPerson 1\n0\n0\n0\n0\n1\n1\n60\n\n\nPerson 2\n1\n0\n1\n0\n1\n1\n67\n\n\nPerson 3\n1\n0\n0\n1\n0\n0\n68\n\n\n…\n…\n…\n…\n…\n…\n…\n…"
+  },
+  {
+    "objectID": "gwas_intro.html#p-n-problem",
+    "href": "gwas_intro.html#p-n-problem",
+    "title": "GWAS: Genome-Wide Asssociation Studies",
+    "section": "p > n problem",
+    "text": "p &gt; n problem\nWhen working with genetic data, one big challenge is that there are way more genetic variants (columns) than there are people (rows) in the our dataset. This is known as the \\(p &gt; n\\) problem, when the number of variables (p) is greater than the number of observations (n).\n\nLet’s explore this with a synthetic dataset!\nWe can start by generating an example of big genetic data that simulates genetic variants. We will call these SNPs (Single Nucleotide Polymorphism), which represent a variation in a single nucleotide.\nFor this purpose we will first create a function that will help us generate one variant (do_one) and then use replicate to run that function many times, thus generating many variants.\n\n\n\n\n\n\nNote\n\n\n\nBe aware! In reality, nearby genetic variants are correlated with one another, but we’ll ignore that correlation structure for now and just generate independent variants.\n\n\nOur function will take two parameters:\n\nMAF: or minor allele frequency, which refers to how often the less common allele appears in the population.\nn_ppl: which will be the number of people in the dataset (units of observation)\n\nNote: p tells our function the probability of a minor allele appearing in our data\n\n# function to simulate one genetic variant\ndo_one &lt;- function(n_ppl, MAF){\n  snp &lt;- rbinom(n = n_ppl, size = 2, p = MAF)\n  return(snp)\n}\n\nNow, we will use the replicate function to run do_one 1000 times, creating an dataset with 100 individuals and 1000 SNPs\n\n# replicate 1000 times to create 1000 variants\nset.seed(494)\nsnps &lt;- replicate(1000, do_one(n_ppl = 100, MAF = 0.1))\n\nNow that we have dataset wot work with we can add a trait. We will create a trait that is not associated to any genetic variant, a null trait. We can do this using the rnorm function to randomly sample from a normal distribution:\n\nset.seed(494) # set seed for reproducibility\ny &lt;- rnorm(100, mean = 65, sd = 3) # generate trait\n\nAt this point, we combine together our simulated SNPs and trait into a single data frame:\n\ndat &lt;- as.data.frame(cbind(y, snps))\n\nNow that we have an example of big data we are ready to explore the association between a given trait an our genetic variants. But, what would happen if we tried to fit our data into a multiple linear regression model?\n\nmodel &lt;- lm(y ~ ., data = dat)\n\nIf we zoom into our model we would find the following:\n\nAfter the 100th \\(\\beta\\) our model stops predicting coefficients, because we can’t estimate more coefficients than we have observations. But why does this happen?"
+  },
+  {
+    "objectID": "gwas_intro.html#theory-of-linear-models",
+    "href": "gwas_intro.html#theory-of-linear-models",
+    "title": "GWAS: Genome-Wide Asssociation Studies",
+    "section": "Theory of Linear Models",
+    "text": "Theory of Linear Models\nIn fitting a linear regression model, our goal is to find the line that provides the “best” fit to our data. More specifically, we hope to find the values of the parameters \\(\\beta_0, \\beta_1, \\beta_2, \\dots\\) that minimize the sum of squared residuals:\n\nHowever, deriving the least squares and maximum likelihood estimates for can be more difficult when we consider a multiple linear regression models with many explanatory variables. Consider:\n\\[E[y | x_1, x_2, ..., x_p] = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\dots \\beta_p x_p.\\] In this case, it’s useful to formulate our linear regression model using vectors and matrices.\nWhere:\n\n\\(\\mathbf{y}\\) is an \\(n\\times 1\\) vector of outcomes (trait values),\n\n\\[\\mathbf{y} = \\begin{pmatrix} y_1 \\\\ y_2 \\\\ \\vdots \\\\ y_n \\end{pmatrix}\\]\n\n\\(\\mathbf{X}\\) is an \\(n \\times p\\) matrix of predictors (genetic variants in our case), and\n\n\\[\\mathbf{X} = \\begin{pmatrix} 1 & x_{11} & \\cdots & x_{p1} \\\\ 1 & x_{12} & \\cdots & x_{p2} \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ 1 & x_{1n} & \\cdots & x_{pn} \\end{pmatrix}\\]\n\n\\(\\mathbf{\\beta}\\) is a \\(p \\times 1\\) vector of coefficients to be estimated (covariates).\n\n\\[\\boldsymbol\\beta = \\begin{pmatrix} \\beta_0 \\\\ \\beta_1 \\\\ \\vdots \\\\ \\beta_p \\end{pmatrix}\\]\nThen we can write our linear regression model as:\n\\[\n\\begin{aligned}\nE[\\mathbf{Y} \\mid \\mathbf{X}] = \\boldsymbol\\beta_0 + \\boldsymbol\\beta_1 \\mathbf{X}  \\rightarrow\n\\mathbf{X} \\beta = \\begin{pmatrix}\n(1 \\cdot \\beta_0 ) + (x_{11} \\cdot \\beta_1) + \\cdots + (x_{p1} \\cdot \\beta_p) \\\\\n(1  \\cdot \\beta_0) + ( x_{12} \\cdot \\beta_1) + \\cdots + (x_{p2} \\cdot \\beta_p) \\\\\n\\vdots  \\\\\n(1  \\cdot \\beta_0) + ( x_{1n} \\cdot \\beta_1) + \\cdots + (x_{pn} \\cdot \\beta_p)\n\\end{pmatrix}\n\\end{aligned}\n\\]\nIn this context, the ordinary least squares (OLS) solution for estimating will be given by:\n\\[\\hat{\\boldsymbol\\beta} = (\\mathbf{X}^T \\mathbf{X})^{-1} \\mathbf{X}^T \\mathbf{y}\\]\nHowever, for this solution to exist, the matrix must be invertible. This requires \\(\\mathbf{X}^T \\mathbf{X}\\) to be full rank (for all columns to be linearly independent), which is only possible if \\(p \\leq n\\).\nWe will dive deeper into how to deal with this problem later on!"
+  },
+  {
+    "objectID": "gwas_methods.html",
+    "href": "gwas_methods.html",
+    "title": "GWAS Methods",
+    "section": "",
+    "text": "An alternative to the \\(p &gt; n\\) when fitting a multiple linear regression model for conducting GWAS is a marginal regression"
+  },
+  {
+    "objectID": "gwas_methods.html#marginal-regression-approach",
+    "href": "gwas_methods.html#marginal-regression-approach",
+    "title": "GWAS Methods",
+    "section": "Marginal Regression Approach",
+    "text": "Marginal Regression Approach\n\\[\nE[y | x_j] = \\beta_0 + \\beta_{1j} x_j\n\\]\nwhere:\n\n\\(y\\) is the trait,\n\\(x_j\\) is the number of minor alleles at position \\(j\\),\nThis is repeated for all positions \\(j = 1, \\dots, m\\).\n\nWith this approach we analyze all predictor variables one-by-one, and based on this we can conduct hypothesis testing.\n\n\n\n\n\n\nNote!\n\n\n\nThere are other types of hypothesis test that could be conducted (i.e.trend test, genotypic test) but they all rely on the a similar idea of testing the association between each SNP and the disease/trait, recording the p-value, and repeating for all SNPs"
+  },
+  {
+    "objectID": "gwas_methods.html#hypothesis-testing",
+    "href": "gwas_methods.html#hypothesis-testing",
+    "title": "GWAS Methods",
+    "section": "Hypothesis Testing",
+    "text": "Hypothesis Testing\nThe goal of hypothesis testing is to discern between two potential theories. For a regression model we test:\n\nNull hypothesis (H0): meaning our predictor has/causes no effect/relationship/difference on our outcome variable \\[H_0: ꞵ1_j = 0 \\]\n\nAlternative hypothesis (HA): when our predictor has/causes an effect/relationship/difference. \\[H_1: ꞵ_1j ≠ 0\\]\n\nTo perform this test we must:\n\nState the hypotheses\nSelect a significance threshold\nCalculate a test statistic\nCalculate the corresponding p-value\nMake a decision (reject \\(H_0\\) if p-value \\(\\leq \\alpha\\), fail to reject \\(H_0\\) if p-value \\(&gt; \\alpha\\) )\n\nNow that we know how to perform a hypothesis test, it’s important to consider the potential errors that can arise from this process\n\nErrors\nIn hypothesis testing, \\(\\alpha\\) represents the significance level, which is the probability of rejecting the null hypothesis when it is actually true. We call this a type I error. Therefore, we choose \\(\\alpha\\) based on how comfortable we are with making a T1E. See below the different scenarios after we have made a decision about our test:\n\nBack to our original question: what SNPs are associated with a specific disease/trait of interest? It can be difficult to keep track of our results when we have hundreds of thousands of p-values to keep track of, this is where Manhattan plots come in!"
+  },
+  {
+    "objectID": "gwas_methods.html#manhattan-plots",
+    "href": "gwas_methods.html#manhattan-plots",
+    "title": "GWAS Methods",
+    "section": "Manhattan Plots",
+    "text": "Manhattan Plots\nTo make sense of the vast number of p-values generated in a GWAS, we need a clear and interpretable way to visualize our results. Manhattan plots provide an intuitive way to identify genetic variants (SNPs) that are significantly associated with a trait by displaying p-values across the genome in a structured format. Below is an example of a Manhattan plot:\n\nContinue to the next section GWAS Implementation to learn more about how you can conduct a GWAS and create your own Manhattan plot!"
+  },
+  {
+    "objectID": "gwas_implementation.html",
+    "href": "gwas_implementation.html",
+    "title": "GWAS Implementation",
+    "section": "",
+    "text": "In this section we will learn how to perform a Genome-Wide Association study in R using marginal regression, and how to visualize our results using Manhattan plots."
+  },
+  {
+    "objectID": "gwas_implementation.html#data-exploration-and-prep",
+    "href": "gwas_implementation.html#data-exploration-and-prep",
+    "title": "GWAS Implementation",
+    "section": "Data: exploration and prep",
+    "text": "Data: exploration and prep\nWe will be using real genotype data and a simulated binary phenotype from the International HapMap Project, specifically from 165 individuals.The data only includes individuals from Utah with Northern and Western European ancestry (the “CEU” population).\nThe data is available in the PLINK format and are stored in three files:\n\n.bed – genotype information\n.fam – individual-level information\n.bim – SNP details\n\n\nPLINK is a tool for analyzing genetic data and conducting GWAS. Learn more here. We’re going to be conducting our GWAS “by hand”, but in practice most people use PLINK or other software programs instead.\n\nWe can use the read.plink function in the snpStats package to read these data into R.\n\n# update file paths\ngwas.dir &lt;- './1_QC_GWAS/HapMap_3_r3_1'\n\nbed &lt;- paste0(gwas.dir, '.bed')\nbim &lt;- paste0(gwas.dir, '.bim')\nfam &lt;- paste0(gwas.dir, '.fam')\n\n\n# NOTE: this might take a minute or two\nhapmap &lt;- snpStats::read.plink(bed, bim, fam)\n\n\nUnderstanding the data\nThe hapmap data object we have created is a “list” containing the three items described above.\n\nclass(hapmap)\n\n[1] \"list\"\n\nnames(hapmap)\n\n[1] \"genotypes\" \"fam\"       \"map\"      \n\n\nThe dataset contains 165 people and 1,457,897 SNPs\n\ndim(hapmap$genotypes)\n\n[1]     165 1457897\n\n\nBut what do we know about each individual? The fam file keeps track of information about each of the people in our study, see a glossary below:\n\nhead(hapmap$fam)\n\n        pedigree  member  father  mother sex affected\nNA06989     1328 NA06989    &lt;NA&gt;    &lt;NA&gt;   2        2\nNA11891     1377 NA11891    &lt;NA&gt;    &lt;NA&gt;   1        2\nNA11843     1349 NA11843    &lt;NA&gt;    &lt;NA&gt;   1        1\nNA12341     1330 NA12341    &lt;NA&gt;    &lt;NA&gt;   2        2\nNA12739     1444 NA12739 NA12748 NA12749   1       NA\nNA10850     1344 NA10850    &lt;NA&gt; NA12058   2       NA\n\n\n\npedigree: the family ID number, ie the ID of the family, or “pedigree”, to which this individual belongs\nmember: the individual ID number\nfather: the ID of the individual’s father, if known and present in this sample (NA otherwise)\nmother: the ID of the individual’s mother, if known and present in this sample (NA otherwise)\nsex: binary sex (1 = male, 2 = female, 0 = unknown)\naffected: a binary simulated phenotype (1 = control, 2 = case)\n\nThe .map file contains information about the different SNPs:\n\nhead(hapmap$map)\n\n           chromosome   snp.name cM position allele.1 allele.2\nrs2185539           1  rs2185539 NA   556738        T        C\nrs11510103          1 rs11510103 NA   557616        G        A\nrs11240767          1 rs11240767 NA   718814        T        C\nrs3131972           1  rs3131972 NA   742584        A        G\nrs3131969           1  rs3131969 NA   744045        A        G\nrs1048488           1  rs1048488 NA   750775        C        T\n\n\n\nchromosome: the chromosome on which the SNP resides\nsnp.name: the name of the SNP (commonly referred to as the “rsID”)\ncM: or centiMorgans; how far about SNPs are from one another along the genome, also known as “genetic distance”\nposition: physical (base pair) distance, position of the SNP (e.g., position = 1 would be the very first nucleotide in our DNA sequence)\nallele.1: one of the alleles at this SNP (according to the PLINK documentation, this is usually the minor allele)\nallele.2: other allele at this SNP (according to the PLINK documentation, this is usually the major allele)\n\n\n\nFormat data for analysis\nLet’s add a minor allele frequencies to our map data frame. (This will come in handy later!)\n\nmaf &lt;- col.summary(hapmap$genotypes)$MAF\n\n# add new MAF variable \nhapmap$map &lt;- hapmap$map %&gt;%\n  mutate(MAF = maf)\n\n# look at SNP info again\nhead(hapmap$map)\n\n           chromosome   snp.name cM position allele.1 allele.2        MAF\nrs2185539           1  rs2185539 NA   556738        T        C 0.00000000\nrs11510103          1 rs11510103 NA   557616        G        A 0.00621118\nrs11240767          1 rs11240767 NA   718814        T        C 0.00000000\nrs3131972           1  rs3131972 NA   742584        A        G 0.15757576\nrs3131969           1  rs3131969 NA   744045        A        G 0.13030303\nrs1048488           1  rs1048488 NA   750775        C        T 0.15853659\n\n\nThe snpstats package uses a unique format to store data. Currently, genotypes are coded as 01, 02, and 03 (with 00 representing missing values). Let’s convert this to the 0, 1, 2 (and NA) format\n\n# what type of object is hapmap$genotypes\nclass(hapmap$genotypes)\n\n[1] \"SnpMatrix\"\nattr(,\"package\")\n[1] \"snpStats\"\n\n# convert from \"SnpMatrix\" to \"numeric\"\nX &lt;- as(hapmap$genotypes, \"numeric\")\n\n# what type of object do we have now \nclass(X)\n\n[1] \"matrix\" \"array\" \n\n# look at first five rows/columns to confirm conversion looks ok\nX[1:5, 1:5]\n\n        rs2185539 rs11510103 rs11240767 rs3131972 rs3131969\nNA06989         2          2          2         1         1\nNA11891         2          2          2         1         2\nNA11843         2          2          2         2         2\nNA12341         2          2          2         1         1\nNA12739         2          2          2         2         2\n\n\nYou should now see a matrix of 0’s, 1’s, and 2’s!"
+  },
+  {
+    "objectID": "gwas_implementation.html#trait-simulation",
+    "href": "gwas_implementation.html#trait-simulation",
+    "title": "GWAS Implementation",
+    "section": "Trait Simulation",
+    "text": "Trait Simulation\n\nBackground\nFor the purpose of this task, we will create artificial data where we already know the “truth,” then run a statistical method on it to see how well it performs.Since we designed the data, we can compare the method’s results to the known truth, allowing us to evaluate its accuracy.\nSimulation studies are a widely used technique in statistical research, as they are especially helpful when testing new methods, exploring how they behave in different situations, or comparing multiple approaches. It’s also a great workaround when getting real data can be tricky.\n\n\nPicking a causal SNP\nLet’s simulate a trait that depends on the SNP known as rs2476601. Here’s what we know about this SNP:\n\nhapmap$map %&gt;%\n  filter(snp.name == 'rs2476601')\n\n          chromosome  snp.name cM  position allele.1 allele.2       MAF\nrs2476601          1 rs2476601 NA 114179091        A        G 0.1196319\n\n\n\n\nSimulating a quantitative trait\nNow, let’s create a quantitative trait y that depends on your genotype at this SNP plus some random noise. We’ll give this SNP an “effect size” of 3: meaning for every additional copy of the minor allele that you carry, your trait value will increase by 3 units (plus or minus some random noise).\n\n# simulate trait\nset.seed(494) # set seed for reproducibility\nn &lt;- nrow(X) # calculate the number of individuals \ny &lt;- 3 * X[,'rs2476601'] + rnorm(n, 0, 1) # y = 2 * x + e\n\n# look at the first few simulated trait values\nhead(y)\n\n NA06989  NA11891  NA11843  NA12341  NA12739  NA10850 \n1.208268 5.626781 5.342265 2.169640 4.945083 6.835045 \n\n\nNow we know by design that our trait y depends on SNP rs10181821! We will use this information later to see how well our methods are working. We’ll now refer to rs10181821 as the causal SNP."
+  },
+  {
+    "objectID": "gwas_implementation.html#quality-control",
+    "href": "gwas_implementation.html#quality-control",
+    "title": "GWAS Implementation",
+    "section": "Quality control",
+    "text": "Quality control\nBefore running our GWAS we should make sure our data is up for the task!\nTo start, we need to filter monomorphic SNPs. This means meaning everyone has the same genotype, and without variation, we can’t estimate an association with a trait.\nSince these SNPs provide no useful information, we’ll remove them by filtering out those with a MAF of zero.\n\n# keep only those SNPs with MAF &gt; 0\nmap.clean &lt;- hapmap$map %&gt;%\n  filter(MAF &gt; 0)\n\nHow many SNPs are left after filtering? How many did we remove?\n\n# check dimensions after filtering\ndim(map.clean)\n\n[1] 1283751       7\n\n# compare to original dimensions\ndim(hapmap$map)\n\n[1] 1457897       7\n\n\nNote we have dropped 174146 SNPs!\nNow, let’s remove these monomorphic SNPs from our genotype matrix (X)\n\n# create vector of which SNPs have a MAF of 0\nmonomorphic &lt;- which(maf == 0) \nhead(monomorphic) \n\n[1]  1  3 10 11 12 17\n\n# remove columns in the monomorphic vector\nX.clean &lt;- X[,-monomorphic]\n\nMake sure to confirm that the new “clean” genotype matrix has the correct number of rows and columns before you move on.\n\ndim(X.clean)\n\n[1]     165 1283751\n\n\n\n\n\n\n\n\nNote\n\n\n\nToday, we’re going to restrict our QC to removing monomoprhic SNPs. But note that there are additional QC steps that are normally conducted before GWAS."
+  },
+  {
+    "objectID": "gwas_implementation.html#gwas",
+    "href": "gwas_implementation.html#gwas",
+    "title": "GWAS Implementation",
+    "section": "GWAS",
+    "text": "GWAS\nNow, we’re going to loop through each of the SNPs, fitting a linear regression model at each SNP. For each model, we’ll record the estimates (betas), standard errors (ses), test statistics (tstats) and p-values (pvals) for the coefficient of interest (the slope).\n\nThis code may take a long time to run!\n\n\n# set up empty vectors for storing results\nbetas &lt;- c()\nses &lt;- c()\ntstats &lt;- c()\npvals &lt;- c()\n\n# loop through all SNPs\nfor(i in 1:ncol(X.clean)){\n  # print out occasional updates telling us what SNP we're analyzing\n  if(i %% 10000 == 0) print(paste('Analyzing SNP', i)) \n  # fit model\n  mod &lt;- lm(y ~ X.clean[,i])\n  # get coefficient information\n  coefinfo &lt;- tidy(mod)\n  # record estimate, SE, test stat, and p-value\n  betas[i] &lt;- coefinfo$estimate[2]\n  ses[i] &lt;- coefinfo$std.error[2]\n  tstats[i] &lt;- coefinfo$statistic[2]\n  pvals[i] &lt;- coefinfo$p.value[2]\n}\n\nError: object 'X.clean' not found\n\n\nWe need to add our results to our map data frame that contains information about each SNP.\n\n# start with the map info for the chr 1 SNPs\nall.results &lt;- map.clean\n\n# then add betas, SEs, etc.\nall.results &lt;- all.results %&gt;%\n  mutate(Estimate = betas,\n         Std.Error = ses,\n         Test.Statistic = tstats,\n         P.Value = pvals)\n\n# look at results\nhead(all.results)\n\n           chromosome   snp.name cM position allele.1 allele.2        MAF\nrs11510103          1 rs11510103 NA   557616        G        A 0.00621118\nrs3131972           1  rs3131972 NA   742584        A        G 0.15757576\nrs3131969           1  rs3131969 NA   744045        A        G 0.13030303\nrs1048488           1  rs1048488 NA   750775        C        T 0.15853659\nrs12562034          1 rs12562034 NA   758311        A        G 0.10909091\nrs12124819          1 rs12124819 NA   766409        G        A 0.28658537"
+  },
+  {
+    "objectID": "gwas_implementation.html#visualizing-results-manhattan-plots",
+    "href": "gwas_implementation.html#visualizing-results-manhattan-plots",
+    "title": "GWAS Implementation",
+    "section": "Visualizing Results: Manhattan Plots",
+    "text": "Visualizing Results: Manhattan Plots\nWe will use the qqman package to create a Manhattan plot and visualize our genome-wide association results.\n\n# Identify genome-wide significant SNPs\nsig.snps &lt;- all.results %&gt;%\n  filter(P.Value &lt; 5e-08) %&gt;% \n  pull(snp.name)\n\nError: object 'all.results' not found\n\n# Generate Manhattan plot\nmanhattan(all.results, \n          chr = \"chromosome\", \n          bp = \"position\", \n          p = \"P.Value\", \n          snp = \"snp.name\", \n          ylim = c(0, 10),\n          col = c('darkblue', 'lightblue'),  # change color scheme\n          highlight = sig.snps,          # Highlight significant SNPs\n          genomewideline = -log10(5e-07),# Adjust genome-wide line, we will see how to determine this indicator in future steps \n          main = \"Manhattan Plot of GWAS Results\")\n\nError: object 'all.results' not found\n\n\nWe can also created a zoomed-in view for Chromosome 2 to get a closer look at the most significant SNPs\n\n# Zoom into chromosome 1 with annotations\nmanhattan(subset(all.results, chromosome == 1), \n          chr = \"chromosome\", \n          bp = \"position\", \n          p = \"P.Value\", \n          snp = \"snp.name\", \n          ylim = c(0, 20),\n          annotatePval = 5e-10, \n          annotateTop = FALSE,\n          main = \"Zoomed-in View: Chromosome 1\")\n\nError in manhattan(subset(all.results, chromosome == 1), chr = \"chromosome\", : Column P.Value not found!\n\n\n\n\n\n\n\n\nNote\n\n\n\nUnderstanding the Y-Axis in a Manhattan Plot\nThe y-axis in a Manhattan plot represents the statistical significance of each SNP’s association with the trait of interest. It is plotted as \\(-\\log_{10}(p\\text{-value})\\), meaning:\n\nHigher points indicate stronger evidence that the SNP is associated with the trait.\n\nA low p-value (e.g., \\(10^{-8}\\)) translates to a high \\(-\\log_{10}(p\\text{-value})\\) value (e.g., 8), making it more noticeable in the plot."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome!",
+    "section": "",
+    "text": "This website was created by Maria Sanchez Linares and presents a summary of what I have learned in my Statistical Genetics course!"
+  },
+  {
+    "objectID": "index.html#section",
+    "href": "index.html#section",
+    "title": "Welcome!",
+    "section": "",
+    "text": "Here I will walk you through an introduction to genetics background, how to conduct a genome-wide association study in R, multiple testing, genetic ancestry and some of the ethics behind statistical genetics.\nI recommend following along in the order the tabs are presented in the navigation bar."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Genomics 101",
+    "section": "",
+    "text": "What is genomics?\n\n\n\nGenomics is the study of all of a person’s genes (the genome), including interactions of those genes with each other and with the person’s environment. - National Insitute of Health (NHI)\nBefore we jump into the world of statistical genetics, here is a brief brief introduction to genetics—what DNA is, how it works, and why it matters."
+  },
+  {
+    "objectID": "about.html#what-is-dna",
+    "href": "about.html#what-is-dna",
+    "title": "Genomics 101",
+    "section": "What is DNA?",
+    "text": "What is DNA?\n\n\n\nDeoxyribonucleic acid (DNA) is the chemical compound that contains the instructions needed to develop and direct the activities of nearly all living organisms. DNA molecules are made of two twisting, paired strands, often referred to as a double helix. Each DNA strand is made of four chemical units, called nucleotide bases, which comprise the genetic “alphabet.” The bases are adenine (A), thymine (T), guanine (G), and cytosine (C). Bases on opposite strands pair specifically: an A always pairs with a T; a C always pairs with a G. The order of the As, Ts, Cs, and Gs determines the meaning of the information encoded in that part of the DNA molecule."
+  },
+  {
+    "objectID": "about.html#what-is-a-genome",
+    "href": "about.html#what-is-a-genome",
+    "title": "Genomics 101",
+    "section": "What is a genome?",
+    "text": "What is a genome?\n\nA genome is an organism’s complete set of DNA. Virtually every single cell in the body contains a complete copy of the approximately 3 billion DNA base pairs that make up the human genome.\n\n\nDNA contains the information needed to build the entire human body. A gene traditionally refers to the unit of DNA that carries the instructions for making a specific protein or set of proteins.\n\n\nLocated on 23 pairs of chromosomes packed into the nucleus of a human cell, genes direct the production of proteins with the assistance of enzymes and messenger molecules. Specifically, an enzyme copies the information in a gene’s DNA into a molecule called messenger ribonucleic acid (mRNA). The mRNA travels out of the nucleus and into the cell’s cytoplasm, where the mRNA is read by a tiny molecular machine called a ribosome, and the information is used to link together small molecules called amino acids in the right order to form a specific protein.\n\n\n\nProteins make up body structures like organs and tissue, as well as control chemical reactions and carry signals between cells. If a cell’s DNA is mutated, an abnormal protein may be produced, which can disrupt the body’s usual processes and lead to a disease such as cancer."
+  },
+  {
+    "objectID": "about.html#what-is-dna-sequencing",
+    "href": "about.html#what-is-dna-sequencing",
+    "title": "Genomics 101",
+    "section": "What is DNA sequencing?",
+    "text": "What is DNA sequencing?\n\nResearchers can use DNA sequencing to search for genetic variations and/or mutations that may play a role in the development or progression of a disease. The disease-causing change may be as small as the substitution, deletion, or addition of a single base pair or as large as a deletion of thousands of bases.\n\n\nSequencing determines the exact order of bases in DNA. Since A always pairs with a T; a C always pairs with a G; only one strand needs to be reported.\n\n\nSequencing by synthesis is the most common method. It uses DNA polymerase (the enzyme in cells that synthesizes DNA) to generate a new strand of DNA from a strand of interest. Tagged nucleotides emit fluorescent signals when added, allowing detection of their sequence. This method produces billions of short reads (about 125 bases each).\n\n\nTo assemble the sequence of all the bases in a large piece of DNA such as a gene, researchers need to read the sequence of overlapping segments. This allows the longer sequence to be assembled from shorter pieces. Each base is read multiple times to ensure accuracy."
+  },
+  {
+    "objectID": "about.html#why-is-it-important",
+    "href": "about.html#why-is-it-important",
+    "title": "Genomics 101",
+    "section": "Why is it important?",
+    "text": "Why is it important?\n\nThe study of genomics is essential for advancing healthcare. Since genetics interacts with factors like diet and lifestyle, understanding it provides deeper insights into disease mechanisms. It has expanded our understanding of complex diseases like cancer, diabetes, and cardiovascular disease, leading to improved diagnostics and treatment strategies. Genomics is also used in agriculture, forensic science, ancestry testing, etc."
+  },
+  {
+    "objectID": "about.html#references",
+    "href": "about.html#references",
+    "title": "Genomics 101",
+    "section": "References",
+    "text": "References\n\nNational Human Genome Research Institute. A brief guide to genomics. Genome.gov. Retrieved [date], from https://www.genome.gov/about-genomics/fact-sheets/A-Brief-Guide-to-Genomics\nAmerican Society of Human Genetics. Building blocks of genetics. Retrieved [date], from https://www.ashg.org/discover-genetics/building-blocks/"
+  }
+]
