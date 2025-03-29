@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Multiple Testing: Problems and Solutions – Statistical Genetics</title>
+<title>Genetic Ancestry – Statistical Genetics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,37 +66,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -146,11 +116,11 @@ window.Quarto = {
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" href="./multiple_testing.html" aria-current="page"> 
+    <a class="nav-link" href="./multiple_testing.html"> 
 <span class="menu-text">Multiple Testing</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./genetic_ancestry.html"> 
+    <a class="nav-link active" href="./genetic_ancestry.html" aria-current="page"> 
 <span class="menu-text">Genetic Ancestry</span></a>
   </li>  
 </ul>
@@ -169,9 +139,13 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-problem-with-multiple-testing" id="toc-the-problem-with-multiple-testing" class="nav-link active" data-scroll-target="#the-problem-with-multiple-testing">The Problem with Multiple Testing</a></li>
-  <li><a href="#solutions-to-multiple-testing" id="toc-solutions-to-multiple-testing" class="nav-link" data-scroll-target="#solutions-to-multiple-testing">Solutions to Multiple Testing</a></li>
-  <li><a href="#independent-vs.-correlated-tests" id="toc-independent-vs.-correlated-tests" class="nav-link" data-scroll-target="#independent-vs.-correlated-tests">Independent vs.&nbsp;Correlated Tests</a></li>
+  <li><a href="#what-is-ancestry" id="toc-what-is-ancestry" class="nav-link active" data-scroll-target="#what-is-ancestry">What is ancestry?</a>
+  <ul class="collapse">
+  <li><a href="#genealogical-ancestry" id="toc-genealogical-ancestry" class="nav-link" data-scroll-target="#genealogical-ancestry">1. Genealogical Ancestry</a></li>
+  <li><a href="#genetic-ancestry" id="toc-genetic-ancestry" class="nav-link" data-scroll-target="#genetic-ancestry">2. Genetic Ancestry</a></li>
+  <li><a href="#genetic-similarity" id="toc-genetic-similarity" class="nav-link" data-scroll-target="#genetic-similarity">3. Genetic Similarity</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -180,7 +154,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Multiple Testing: Problems and Solutions</h1>
+<h1 class="title">Genetic Ancestry</h1>
 </div>
 
 
@@ -197,80 +171,27 @@ window.Quarto = {
 </header>
 
 
-<section id="the-problem-with-multiple-testing" class="level2">
-<h2 class="anchored" data-anchor-id="the-problem-with-multiple-testing">The Problem with Multiple Testing</h2>
-<p>When performing a large number of hypothesis tests, the likelihood of encountering <strong>false positives</strong> (Type I errors) increases. To address this, we aim to <strong>control for multiple testing</strong> by maintaining the error rate at an acceptable level. Two commonly used error rates are:</p>
+<section id="what-is-ancestry" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-ancestry">What is ancestry?</h2>
+<p>In general, <em>ancestry</em> indicates a general connection to people or things in the past. However, its meaning can vary depending on the context. A common source of confusion is the frequent interchangeable use of three separate concepts: <strong>genealogical ancestry, genetic ancestry, and genetic similarity.</strong></p>
+<section id="genealogical-ancestry" class="level3">
+<h3 class="anchored" data-anchor-id="genealogical-ancestry">1. Genealogical Ancestry</h3>
+<p>Genealogical Ancestry refers to the identifiable ancestors in a person’s family tree defines as an individual’s <em>pedigree</em>. It is typically quantified based on lineage, with ancestry categories assigned according to cultural, geographical, or other identity-based labels. However, due to limited records, knowledge of distant ancestors is often incomplete.</p>
+<p>This structure can be visualized as a graph (see figure _), with nodes representing ancestors and edges indicating parent-child relationships.</p>
+</section>
+<section id="genetic-ancestry" class="level3">
+<h3 class="anchored" data-anchor-id="genetic-ancestry">2. Genetic Ancestry</h3>
+<p>Genetic Ancestry represents the subset of genealogical ancestry from whom an individual has inherited DNA. Since only half of a parent’s DNA is passed to offspring each generation, genetic ancestry includes only a fraction of genealogical ancestors. It is mapped through an <em>ancestral recombination graph (ARG)</em> (see figure_), which tracks the genetic material inherited and highlights which ancestors contributed to an individual’s genome. Unlike genealogical ancestry, genetic ancestry excludes ancestors who left no genetic trace.</p>
+</section>
+<section id="genetic-similarity" class="level3">
+<h3 class="anchored" data-anchor-id="genetic-similarity">3. Genetic Similarity</h3>
+<p>Genetic Similarity describes the degree to which individuals share genetic material, regardless of direct inheritance. It arises from common ancestry, population history, migration, and evolutionary factors. While genealogical and genetic ancestry focus on lineage and inheritance, genetic similarity helps analyze broader connections among individuals or groups, often used in population genetics and ancestry estimations.</p>
+</section>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references">References</h3>
 <ul>
-<li><p><strong>Family-Wise Error Rate (FWER):</strong> The probability of making at least one Type I error across all tests.<br>
-<span class="math display">\[
-\text{FWER} = P(\text{at least one Type I error})
-\]</span></p>
-<p>A common threshold is 0.05.</p></li>
-<li><p><strong>False Discovery Rate (FDR):</strong> The expected proportion of false discoveries (false positives) among all significant results.<br>
-<span class="math display">\[
-\text{FDR} = E \left[ \frac{FP}{FP + TP} \right]
-\]</span></p>
-<p>A common threshold is also 0.05.</p></li>
+<li>Mathieson I, Scally A (2020) What is ancestry? PLoS Genet 16(3): e1008624. https://doi.org/10.1371/journal.pgen.1008624</li>
 </ul>
-<p>In both cases, we need to adjust our significance threshold to account for the number of tests conducted.</p>
-</section>
-<section id="solutions-to-multiple-testing" class="level2">
-<h2 class="anchored" data-anchor-id="solutions-to-multiple-testing">Solutions to Multiple Testing</h2>
-<section id="bonferroni-correction" class="level4">
-<h4 class="anchored" data-anchor-id="bonferroni-correction"><strong>1. Bonferroni Correction</strong></h4>
-<p>One widely used approach is the <strong>Bonferroni Correction</strong>, which adjusts the significance threshold by dividing the desired FWER by the number of tests:</p>
-<p><span class="math display">\[
-\alpha_{\text{Bonferroni}} = \frac{\text{FWER}}{\text{# of tests}}
-\]</span></p>
-<p>For example, if we conduct <strong>1 million tests</strong> and want to control the FWER at <strong>5%</strong>, our new significance threshold would be:</p>
-<p><span class="math display">\[\alpha_{\text{Bonferroni}} = \frac{0.05}{1,000,000} = 5 \times 10^{-8}\]</span></p>
-<p><strong>Pros:</strong> Simple and easy to calculate</p>
-<p><strong>Cons:</strong> Can be overly conservative, especially when tests are correlated (which is often the case in GWAS), reducing power and increasing Type II errors.</p>
-</section>
-<section id="simulation-based-approach" class="level4">
-<h4 class="anchored" data-anchor-id="simulation-based-approach"><strong>2. Simulation-Based Approach</strong></h4>
-<p>Another way to control for multiple testing is through <strong>simulation-based methods</strong>, such as those described in the paper we read for Journal Club 3.</p>
-<p><strong>Procedure:</strong></p>
-<ol type="1">
-<li>Simulate a <strong>null trait</strong> (a trait with no association to any SNPs).</li>
-<li>Perform GWAS on this null trait.</li>
-<li>Record the smallest <strong>p-value</strong> from this GWAS.</li>
-<li>Repeat steps 1–3 many times (e.g., <strong>100–1,000 times</strong>).</li>
-<li>Rank the simulated <strong>p-values</strong> and determine the <strong>5th percentile</strong> threshold.</li>
-</ol>
-<p><strong>Pros:</strong> Works even when tests are correlated</p>
-<p><strong>Cons:</strong> Computationally expensive</p>
-</section>
-</section>
-<section id="independent-vs.-correlated-tests" class="level2">
-<h2 class="anchored" data-anchor-id="independent-vs.-correlated-tests">Independent vs.&nbsp;Correlated Tests</h2>
-<section id="independent-tests" class="level4">
-<h4 class="anchored" data-anchor-id="independent-tests"><strong>Independent Tests</strong></h4>
-<p>When tests are independent, the probability of at least one <strong>Type I error</strong> follows:</p>
-<p><span class="math display">\[\text{FWER} = 1 - [1 - \alpha]^{\text{# of tests}}\]</span></p>
-<p>To control FWER, we need a smaller significance threshold. Both <strong>Bonferroni</strong> and <strong>Simulation-Based</strong> approaches work well in this setting and yield similar results.</p>
-</section>
-<section id="correlated-tests" class="level4">
-<h4 class="anchored" data-anchor-id="correlated-tests"><strong>Correlated Tests</strong></h4>
-<p>When tests are correlated, the two methods can yield very different thresholds:</p>
-<ul>
-<li><strong>Bonferroni is too conservative</strong>, leading to more Type II errors and lower power.</li>
-<li><strong>A better approach</strong> is to adjust for the <strong>effective number of independent tests</strong>, rather than the total number of tests.</li>
-</ul>
-<p><strong>Potential Project Idea:</strong> Explore alternative methods for multiple testing correction beyond Bonferroni and simulation-based approaches.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Key Takeaway">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Key Takeaway
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>By choosing the right multiple testing correction method, we balance <strong>Type I errors (false positives)</strong> and <strong>Type II errors (false negatives)</strong> while maintaining statistical power.</p>
-</div>
-</div>
 
 
 </section>
