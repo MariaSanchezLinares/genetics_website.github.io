@@ -20,15 +20,15 @@ where:
 With this approach we analyze all predictor variables **one-by-one**, and based on this we can conduct hypothesis testing.
 
 ::: {.callout-tip title="Note!"}
-There are other types of hypothesis test that could be conducted (i.e.trend test, genotypic test) but they all rely on the a similar idea of testing the association between each SNP and the disease/trait, recording the p-value, and repeating for all SNPs 
+There are other types of hypothesis test that could be conducted (i.e.trend test, genotypic test) but they all rely on the a similar idea of testing the association between each SNP and the disease/trait, recording the p-value, and repeating for all SNPs
 :::
 
 ## Hypothesis Testing
 
-The goal of hypothesis testing is to discern between two potential theories. For a regression model we test: 
+The goal of hypothesis testing is to discern between two potential theories. For a regression model we test:
 
-- Null hypothesis (H0): meaning our predictor has/causes no effect/relationship/difference on our outcome variable $$H_0: ꞵ1_j = 0 $$\
-- Alternative hypothesis (HA): when our predictor has/causes an effect/relationship/difference. $$H_1: ꞵ_1j ≠ 0$$
+-   Null hypothesis (H0): meaning our predictor has/causes no effect/relationship/difference on our outcome variable $$H_0: ꞵ1_j = 0 $$\
+-   Alternative hypothesis (HA): when our predictor has/causes an effect/relationship/difference. $$H_1: ꞵ_1j ≠ 0$$
 
 To perform this test we must:
 
@@ -46,7 +46,7 @@ Now that we know how to perform a hypothesis test, it's important to consider th
 
 ### Errors
 
-In hypothesis testing, $\alpha$ represents the significance level, which is the probability of rejecting the null hypothesis when it is actually true. We call this a type I error. Therefore, we choose $\alpha$ based on how comfortable we are with making a T1E. See below the different scenarios after we have made a decision about our test: 
+In hypothesis testing, $\alpha$ represents the significance level, which is the probability of rejecting the null hypothesis when it is actually true. We call this a type I error. Therefore, we choose $\alpha$ based on how comfortable we are with making a T1E. See below the different scenarios after we have made a decision about our test:
 
 <img src="errors.png" width="600px" style="border-radius: 20px;"/>
 
@@ -56,10 +56,8 @@ Back to our original question: *what SNPs are associated with a specific disease
 
 To make sense of the vast number of p-values generated in a GWAS, we need a clear and interpretable way to visualize our results. Manhattan plots provide an intuitive way to identify genetic variants (SNPs) that are significantly associated with a trait by displaying p-values across the genome in a structured format. Below is an example of a Manhattan plot:
 
+::: {style="text-align: center;"}
 <img src="manhattan.png" width="600px" style="border-radius: 20px;"/>
+:::
 
-Continue to the next section [GWAS Implementation](gwas_implementation.qmd){target=_blank} to learn more about how you can conduct a GWAS and create your own Manhattan plot! 
-
-
-
-
+Continue to the next section [GWAS Implementation](gwas_implementation.qmd){target="_blank"} to learn more about how you can conduct a GWAS and create your own Manhattan plot!

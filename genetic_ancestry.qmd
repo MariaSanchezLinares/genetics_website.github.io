@@ -1,0 +1,47 @@
+---
+title: "Genetic Ancestry"
+format: html
+---
+
+## What is ancestry?
+
+In general, *ancestry* indicates a general connection to people or things in the past. However, its meaning can vary depending on the context. A common source of confusion is the frequent interchangeable use of three separate concepts: **genealogical ancestry, genetic ancestry, and genetic similarity.**
+
+### 1. Genealogical Ancestry
+
+Genealogical Ancestry refers to the identifiable ancestors in a person’s family tree defines as an individual’s *pedigree*. It is typically quantified based on lineage, with ancestry categories assigned according to cultural, geographical, or other identity-based labels. However, due to limited records, knowledge of distant ancestors is often incomplete.
+
+This structure can be visualized as a graph (see figure 1, diagram A), with nodes representing ancestors and edges indicating parent-child relationships.
+
+### 2. Genetic Ancestry
+
+Genetic Ancestry represents the subset of genealogical ancestry from whom an individual has inherited DNA (see figure 1, diagram B). Since only half of a parent's DNA is passed to offspring each generation, genetic ancestry includes only a fraction of genealogical ancestors.
+
+It is mapped through an *ancestral recombination graph (ARG)* (see figure 1, diagram C), which tracks the genetic material inherited and highlights which ancestors contributed to an individual’s genome.
+
+### 3. Genetic Similarity
+
+Genetic Similarity describes the degree to which individuals share genetic material, regardless of direct inheritance. It arises from common ancestry, population history, migration, and evolutionary factors. Beyond lineage and inheritance, genetic similarity helps analyze broader connections among individuals or groups, often used in population genetics and ancestry estimations.
+
+## Visualizing Ancestry
+
+To better understand the distinctions between genealogical and genetic ancestry, the following diagram presents different representations:
+
+::: {#fig-myfigure .figure}
+<img src="arg.png" width="400px" style="border-radius: 20px;"/>
+:::
+
+-   **Diagram A: Pedigree of a Single Individual:** This shows a traditional family tree, where each node represents an ancestor and edges denote parent-child relationships. Certain ancestors are marked with colored circles, indicating that they belong to specific ancestry categories. This diagram represents genealogical ancestry, which includes all ancestors, regardless of whether their DNA was inherited.
+
+-   **Diagram B: Genetic Ancestry at a Single Genomic Position:** Unlike the pedigree, which includes all ancestors, genetic ancestry follows specific paths through the pedigree. The red and blue lines highlight two paths through which genetic material at a particular position in the genome has been inherited, *illustrating how only a subset of genealogical ancestors contribute to an individual’s DNA.*
+
+-   **Diagram C: Ancestral Recombination Graph (ARG) for a Single Individual:** This structure traces the actual genetic inheritance by combining different genomic positions. It shows recombination events (where genetic material from different ancestors mixes) and coalescence events (where lineages converge). Unlike the full pedigree, the ARG only includes ancestors from whom genetic material was inherited.
+
+-   **Diagram D: Merged ARG for Multiple Individuals:** This expands on the concept in C by merging ARGs from multiple individuals, showing how their genetic ancestry interconnects. This representation is crucial in population genetics for understanding shared ancestry and genetic relationships among individuals.
+
+  By analyzing these connections, we can gain insights into **population structure**, or how genetic variation is distributed among groups. However, to explore population structure in more detail, we also use statistical tools that help quantify genetic differences and relationships within and between populations. These methods will be explored further in the [next section.](population_structure.qmd){target="_blank"}
+
+
+### References
+
+-   Mathieson I, Scally A (2020) What is ancestry? PLoS Genet 16(3): e1008624. https://doi.org/10.1371/journal.pgen.1008624

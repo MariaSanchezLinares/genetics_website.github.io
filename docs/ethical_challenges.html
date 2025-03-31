@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Welcome! – Statistical Genetics</title>
+<title>Ethical Challenges in Genetics Research – Statistical Genetics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -71,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -89,7 +89,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -119,6 +119,36 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./multiple_testing.html"> 
 <span class="menu-text">Multiple Testing</span></a>
   </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-genetic-ancestry" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Genetic Ancestry</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-genetic-ancestry">    
+        <li>
+    <a class="dropdown-item" href="./genetic_ancestry.html">
+ <span class="dropdown-text">What is Ancestry?</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./population_structure.html">
+ <span class="dropdown-text">Population Structure</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data-challenges" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Data Challenges</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-data-challenges">    
+        <li>
+    <a class="dropdown-item" href="./statistical_challenges.html">
+ <span class="dropdown-text">Statistical Challenges</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./ethical_challenges.html">
+ <span class="dropdown-text">Ethical Challenges</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -130,13 +160,24 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#race-and-etnicity-as-population-descriptors" id="toc-race-and-etnicity-as-population-descriptors" class="nav-link active" data-scroll-target="#race-and-etnicity-as-population-descriptors">Race and Etnicity as Population Descriptors</a></li>
+  <li><a href="#other-descriptors" id="toc-other-descriptors" class="nav-link" data-scroll-target="#other-descriptors">Other descriptors</a></li>
+  <li><a href="#takeaways" id="toc-takeaways" class="nav-link" data-scroll-target="#takeaways">Takeaways</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Welcome!</h1>
+<h1 class="title">Ethical Challenges in Genetics Research</h1>
 </div>
 
 
@@ -153,14 +194,31 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This website was created by Maria Sanchez Linares and presents a summary of what I have learned in my Statistical Genetics course!</p>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
-<p>Here I will walk you through an introduction to genetics background, how to conduct a genome-wide association study in R, multiple testing, genetic ancestry and some of the ethics behind statistical genetics.</p>
-<p>I recommend following along in the order the tabs are presented in the navigation bar.</p>
-<div style="text-align: center;">
-<p><img src="index_pic.png" width="600px" style="border-radius: 20px;"></p>
-</div>
+<p>Researchers use human genetic information to address a variety of questions about human history and evolution, human biology, diseases, and heritable traits (e.g., height or serum cholesterol).</p>
+<p>However, as genetic and genomic information become more accessible the increased use of human genetic data in research across different disciplines raises ethical concerns, particularly regarding the use of population descriptors.</p>
+<p>While these descriptors have historically been used as shorthand for the complex patterns of human genetic variation shaped by history, migration, and evolution, their broad and growing use in genomic research calls for clearer guidelines on their use.</p>
+<section id="race-and-etnicity-as-population-descriptors" class="level2">
+<h2 class="anchored" data-anchor-id="race-and-etnicity-as-population-descriptors">Race and Etnicity as Population Descriptors</h2>
+<p>In humans, race has a long history of being incorrectly identified as the major genetic reason for phenotypic differences between groups, when in reality race is a socially constructed designation.</p>
+<p>As a result, the misconception that human beings can be naturally divided into biologically distinguishable races has become embedded in scientific research, medical practice and technologies, and formal education.</p>
+<p>Rather, the <em>structure of genetic variation results from repeated human population mixing and movements across time</em>, and no single variable fully represents this complexity.</p>
+</section>
+<section id="other-descriptors" class="level2">
+<h2 class="anchored" data-anchor-id="other-descriptors">Other descriptors</h2>
+<p>Other population descriptors used by researchers to categorize human populations include geographic ancestry, linguistic groups, and genetic clusters based on shared variants. These descriptors can provide valuable insights but also reinforce misleading or simplistic categorizations. For example, geographic labels may not fully capture historical migration patterns.</p>
+</section>
+<section id="takeaways" class="level2">
+<h2 class="anchored" data-anchor-id="takeaways">Takeaways</h2>
+<ul>
+<li><p>Race is a social construct, not a biological determinant. Misrepresenting race as a genetic category can lead to flawed scientific conclusions, reinforce racial biases, and perpetuate health disparities.</p></li>
+<li><p>No single descriptor fully captures human genetic diversity, and oversimplified labels can obscure the true complexity of ancestry and population structure.</p></li>
+<li><p>Poorly defined categories can lead to inaccurate medical diagnoses, ineffective treatments, and misinterpretations in research, particularly in genetics and biomedical sciences.</p></li>
+<li><p>Clear guidelines are necessary to ensure ethical and accurate research. Researchers must use precise, context-appropriate descriptors to improve scientific integrity and expand the relevance of genetic studies across diverse populations.</p></li>
+</ul>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>National Academies of Sciences, Engineering, and Medicine. 2023. Using Population Descriptors in Genetics and Genomics Research: A New Framework for an Evolving Field. Washington, DC: The National Academies Press. https://doi.org/10.17226/26902.</p>
 
 
 </section>

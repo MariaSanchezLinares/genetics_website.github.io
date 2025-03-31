@@ -1,0 +1,36 @@
+---
+title: "Ethical Challenges in Genetics Research"
+format: html
+---
+
+Researchers use human genetic information to address a variety of questions about human history and evolution, human biology, diseases, and heritable traits (e.g., height or serum cholesterol). 
+
+However, as genetic and genomic information become more accessible the increased use of human genetic data in research across different disciplines raises ethical concerns, particularly regarding the use of population descriptors. 
+
+While these descriptors have historically been used as shorthand for the complex patterns of human genetic variation shaped by history, migration, and evolution, their broad and growing use in genomic research calls for clearer guidelines on their use. 
+
+## Race and Etnicity as Population Descriptors
+
+In humans, race has a long history of being incorrectly identified as the major genetic reason for phenotypic differences between groups, when in reality race is a socially constructed designation. 
+
+As a result, the misconception that human beings can be naturally divided into biologically distinguishable races has become embedded in scientific research, medical practice and technologies, and formal education.
+
+Rather, the *structure of genetic variation results from repeated human population mixing and movements across time*, and no single variable fully represents this complexity. 
+
+## Other descriptors 
+
+Other population descriptors used by researchers to categorize human populations include geographic ancestry, linguistic groups, and genetic clusters based on shared variants. These descriptors can provide valuable insights but also reinforce misleading or simplistic categorizations. For example, geographic labels may not fully capture historical migration patterns. 
+
+## Takeaways 
+
+-  Misrepresenting race as a genetic category can lead to flawed scientific conclusions, reinforce racial biases, and perpetuate health disparities.
+
+-  No single descriptor fully captures human genetic diversity, and oversimplified labels can obscure the true complexity of ancestry and population structure.
+
+-  Poorly defined categories can lead to inaccurate medical diagnoses, ineffective treatments, and misinterpretations in research, particularly in genetics and biomedical sciences.
+
+-  Clear guidelines are necessary to ensure ethical and accurate research. Researchers must use precise, context-appropriate descriptors to improve scientific integrity and expand the relevance of genetic studies across diverse populations.
+
+## References 
+
+National Academies of Sciences, Engineering, and Medicine. 2023. Using Population Descriptors in Genetics and Genomics Research: A New Framework for an Evolving Field. Washington, DC: The National Academies Press. https://doi.org/10.17226/26902.

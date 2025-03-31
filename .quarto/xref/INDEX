@@ -19,5 +19,17 @@
   },
   "gwas_implementation.qmd": {
     "gwas_implementation.html": "41b97fb9"
+  },
+  "genetic_ancestry.qmd": {
+    "genetic_ancestry.html": "ff159267"
+  },
+  "population_structure.qmd": {
+    "population_structure.html": "3e1d1ce9"
+  },
+  "ethical_challenges.qmd": {
+    "ethical_challenges.html": "c949fe68"
+  },
+  "statistical_challenges.qmd": {
+    "statistical_challenges.html": "7b2f0503"
   }
 }

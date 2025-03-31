@@ -1,0 +1,10 @@
+---
+title: "Working with Genetic Data: Statistical Challenges "
+format: html
+---
+
+Observational data → confounding → "inflation" and omitted variable bias 
+ maybe:
+- Adjusting for population structure in GWAS 
+- Choosing # PCs (helpful plots)
+ 

@@ -120,9 +120,11 @@ After the 100th $\beta$ our model stops predicting coefficients, because **we ca
 
 In fitting a linear regression model, our goal is to find the line that provides the "best" fit to our data. More specifically, we hope to find the values of the parameters $\beta_0, \beta_1, \beta_2, \dots$ that minimize the sum of squared residuals:
 
-<img src="residuals.png" width="350px" style="border-radius: 20px;"/>
+<div style="text-align: center;">
+  <img src="residuals.png" width="350px" style="border-radius: 20px;"/>
+</div>
 
-However, deriving the least squares and maximum likelihood estimates for can be more difficult when we consider a multiple linear regression models with many explanatory variables. Consider:
+However, deriving the least squares and maximum likelihood estimates can be more difficult when we consider a multiple linear regression models with many explanatory variables. Consider:
 
 $$E[y | x_1, x_2, ..., x_p] = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots \beta_p x_p.$$ In this case, it's useful to formulate our linear regression model using vectors and matrices.
 
