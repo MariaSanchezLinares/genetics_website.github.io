@@ -119,10 +119,36 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./multiple_testing.html"> 
 <span class="menu-text">Multiple Testing</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="./genetic_ancestry.html" aria-current="page"> 
-<span class="menu-text">Genetic Ancestry</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-genetic-ancestry" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Genetic Ancestry</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-genetic-ancestry">    
+        <li>
+    <a class="dropdown-item" href="./genetic_ancestry.html">
+ <span class="dropdown-text">What is Ancestry?</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./population_structure.html">
+ <span class="dropdown-text">Population Structure</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data-challenges" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Data Challenges</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-data-challenges">    
+        <li>
+    <a class="dropdown-item" href="./statistical_challenges.html">
+ <span class="dropdown-text">Statistical Challenges</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./ethical_challenges.html">
+ <span class="dropdown-text">Ethical Challenges</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -144,6 +170,9 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#genealogical-ancestry" id="toc-genealogical-ancestry" class="nav-link" data-scroll-target="#genealogical-ancestry">1. Genealogical Ancestry</a></li>
   <li><a href="#genetic-ancestry" id="toc-genetic-ancestry" class="nav-link" data-scroll-target="#genetic-ancestry">2. Genetic Ancestry</a></li>
   <li><a href="#genetic-similarity" id="toc-genetic-similarity" class="nav-link" data-scroll-target="#genetic-similarity">3. Genetic Similarity</a></li>
+  </ul></li>
+  <li><a href="#visualizing-ancestry" id="toc-visualizing-ancestry" class="nav-link" data-scroll-target="#visualizing-ancestry">Visualizing Ancestry</a>
+  <ul class="collapse">
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
   </ul>
@@ -177,16 +206,38 @@ ul.task-list li input[type="checkbox"] {
 <section id="genealogical-ancestry" class="level3">
 <h3 class="anchored" data-anchor-id="genealogical-ancestry">1. Genealogical Ancestry</h3>
 <p>Genealogical Ancestry refers to the identifiable ancestors in a person’s family tree defines as an individual’s <em>pedigree</em>. It is typically quantified based on lineage, with ancestry categories assigned according to cultural, geographical, or other identity-based labels. However, due to limited records, knowledge of distant ancestors is often incomplete.</p>
-<p>This structure can be visualized as a graph (see figure _), with nodes representing ancestors and edges indicating parent-child relationships.</p>
+<p>This structure can be visualized as a graph (see figure 1, diagram A), with nodes representing ancestors and edges indicating parent-child relationships.</p>
 </section>
 <section id="genetic-ancestry" class="level3">
 <h3 class="anchored" data-anchor-id="genetic-ancestry">2. Genetic Ancestry</h3>
-<p>Genetic Ancestry represents the subset of genealogical ancestry from whom an individual has inherited DNA. Since only half of a parent’s DNA is passed to offspring each generation, genetic ancestry includes only a fraction of genealogical ancestors. It is mapped through an <em>ancestral recombination graph (ARG)</em> (see figure_), which tracks the genetic material inherited and highlights which ancestors contributed to an individual’s genome. Unlike genealogical ancestry, genetic ancestry excludes ancestors who left no genetic trace.</p>
+<p>Genetic Ancestry represents the subset of genealogical ancestry from whom an individual has inherited DNA (see figure 1, diagram B). Since only half of a parent’s DNA is passed to offspring each generation, genetic ancestry includes only a fraction of genealogical ancestors.</p>
+<p>It is mapped through an <em>ancestral recombination graph (ARG)</em> (see figure 1, diagram C), which tracks the genetic material inherited and highlights which ancestors contributed to an individual’s genome.</p>
 </section>
 <section id="genetic-similarity" class="level3">
 <h3 class="anchored" data-anchor-id="genetic-similarity">3. Genetic Similarity</h3>
-<p>Genetic Similarity describes the degree to which individuals share genetic material, regardless of direct inheritance. It arises from common ancestry, population history, migration, and evolutionary factors. While genealogical and genetic ancestry focus on lineage and inheritance, genetic similarity helps analyze broader connections among individuals or groups, often used in population genetics and ancestry estimations.</p>
+<p>Genetic Similarity describes the degree to which individuals share genetic material, regardless of direct inheritance. It arises from common ancestry, population history, migration, and evolutionary factors. Beyond lineage and inheritance, genetic similarity helps analyze broader connections among individuals or groups, often used in population genetics and ancestry estimations.</p>
 </section>
+</section>
+<section id="visualizing-ancestry" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-ancestry">Visualizing Ancestry</h2>
+<p>To better understand the distinctions between genealogical and genetic ancestry, the following diagram presents different representations:</p>
+<div id="fig-myfigure" class="figure quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-myfigure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p><img src="arg.png" width="400px" style="border-radius: 20px;" class="figure-img"></p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-myfigure-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p><strong>Diagram A: Pedigree of a Single Individual:</strong> This shows a traditional family tree, where each node represents an ancestor and edges denote parent-child relationships. Certain ancestors are marked with colored circles, indicating that they belong to specific ancestry categories. This diagram represents genealogical ancestry, which includes all ancestors, regardless of whether their DNA was inherited.</p></li>
+<li><p><strong>Diagram B: Genetic Ancestry at a Single Genomic Position:</strong> Unlike the pedigree, which includes all ancestors, genetic ancestry follows specific paths through the pedigree. The red and blue lines highlight two paths through which genetic material at a particular position in the genome has been inherited, <em>illustrating how only a subset of genealogical ancestors contribute to an individual’s DNA.</em></p></li>
+<li><p><strong>Diagram C: Ancestral Recombination Graph (ARG) for a Single Individual:</strong> This structure traces the actual genetic inheritance by combining different genomic positions. It shows recombination events (where genetic material from different ancestors mixes) and coalescence events (where lineages converge). Unlike the full pedigree, the ARG only includes ancestors from whom genetic material was inherited.</p></li>
+<li><p><strong>Diagram D: Merged ARG for Multiple Individuals:</strong> This expands on the concept in C by merging ARGs from multiple individuals, showing how their genetic ancestry interconnects. This representation is crucial in population genetics for understanding shared ancestry and genetic relationships among individuals.</p></li>
+</ul>
+<p>By analyzing these connections, we can gain insights into <strong>population structure</strong>, or how genetic variation is distributed among groups. However, to explore population structure in more detail, we also use statistical tools that help quantify genetic differences and relationships within and between populations. These methods will be explored further in the <a href="./population_structure.html" target="_blank">next section.</a></p>
 <section id="references" class="level3">
 <h3 class="anchored" data-anchor-id="references">References</h3>
 <ul>

@@ -4,70 +4,91 @@
     "href": "genetic_ancestry.html",
     "title": "Genetic Ancestry",
     "section": "",
-    "text": "In general, ancestry indicates a general connection to people or things in the past. However, its meaning can vary depending on the context. A common source of confusion is the frequent interchangeable use of three separate concepts: genealogical ancestry, genetic ancestry, and genetic similarity.\n\n\nGenealogical Ancestry refers to the identifiable ancestors in a person’s family tree defines as an individual’s pedigree. It is typically quantified based on lineage, with ancestry categories assigned according to cultural, geographical, or other identity-based labels. However, due to limited records, knowledge of distant ancestors is often incomplete.\nThis structure can be visualized as a graph (see figure _), with nodes representing ancestors and edges indicating parent-child relationships.\n\n\n\nGenetic Ancestry represents the subset of genealogical ancestry from whom an individual has inherited DNA. Since only half of a parent’s DNA is passed to offspring each generation, genetic ancestry includes only a fraction of genealogical ancestors. It is mapped through an ancestral recombination graph (ARG) (see figure_), which tracks the genetic material inherited and highlights which ancestors contributed to an individual’s genome. Unlike genealogical ancestry, genetic ancestry excludes ancestors who left no genetic trace.\n\n\n\nGenetic Similarity describes the degree to which individuals share genetic material, regardless of direct inheritance. It arises from common ancestry, population history, migration, and evolutionary factors. While genealogical and genetic ancestry focus on lineage and inheritance, genetic similarity helps analyze broader connections among individuals or groups, often used in population genetics and ancestry estimations.\n\n\n\n\nMathieson I, Scally A (2020) What is ancestry? PLoS Genet 16(3): e1008624. https://doi.org/10.1371/journal.pgen.1008624"
+    "text": "In general, ancestry indicates a general connection to people or things in the past. However, its meaning can vary depending on the context. A common source of confusion is the frequent interchangeable use of three separate concepts: genealogical ancestry, genetic ancestry, and genetic similarity.\n\n\nGenealogical Ancestry refers to the identifiable ancestors in a person’s family tree defines as an individual’s pedigree. It is typically quantified based on lineage, with ancestry categories assigned according to cultural, geographical, or other identity-based labels. However, due to limited records, knowledge of distant ancestors is often incomplete.\nThis structure can be visualized as a graph (see figure 1, diagram A), with nodes representing ancestors and edges indicating parent-child relationships.\n\n\n\nGenetic Ancestry represents the subset of genealogical ancestry from whom an individual has inherited DNA (see figure 1, diagram B). Since only half of a parent’s DNA is passed to offspring each generation, genetic ancestry includes only a fraction of genealogical ancestors.\nIt is mapped through an ancestral recombination graph (ARG) (see figure 1, diagram C), which tracks the genetic material inherited and highlights which ancestors contributed to an individual’s genome.\n\n\n\nGenetic Similarity describes the degree to which individuals share genetic material, regardless of direct inheritance. It arises from common ancestry, population history, migration, and evolutionary factors. Beyond lineage and inheritance, genetic similarity helps analyze broader connections among individuals or groups, often used in population genetics and ancestry estimations."
   },
   {
     "objectID": "genetic_ancestry.html#what-is-ancestry",
     "href": "genetic_ancestry.html#what-is-ancestry",
     "title": "Genetic Ancestry",
     "section": "",
-    "text": "In general, ancestry indicates a general connection to people or things in the past. However, its meaning can vary depending on the context. A common source of confusion is the frequent interchangeable use of three separate concepts: genealogical ancestry, genetic ancestry, and genetic similarity.\n\n\nGenealogical Ancestry refers to the identifiable ancestors in a person’s family tree defines as an individual’s pedigree. It is typically quantified based on lineage, with ancestry categories assigned according to cultural, geographical, or other identity-based labels. However, due to limited records, knowledge of distant ancestors is often incomplete.\nThis structure can be visualized as a graph (see figure _), with nodes representing ancestors and edges indicating parent-child relationships.\n\n\n\nGenetic Ancestry represents the subset of genealogical ancestry from whom an individual has inherited DNA. Since only half of a parent’s DNA is passed to offspring each generation, genetic ancestry includes only a fraction of genealogical ancestors. It is mapped through an ancestral recombination graph (ARG) (see figure_), which tracks the genetic material inherited and highlights which ancestors contributed to an individual’s genome. Unlike genealogical ancestry, genetic ancestry excludes ancestors who left no genetic trace.\n\n\n\nGenetic Similarity describes the degree to which individuals share genetic material, regardless of direct inheritance. It arises from common ancestry, population history, migration, and evolutionary factors. While genealogical and genetic ancestry focus on lineage and inheritance, genetic similarity helps analyze broader connections among individuals or groups, often used in population genetics and ancestry estimations.\n\n\n\n\nMathieson I, Scally A (2020) What is ancestry? PLoS Genet 16(3): e1008624. https://doi.org/10.1371/journal.pgen.1008624"
+    "text": "In general, ancestry indicates a general connection to people or things in the past. However, its meaning can vary depending on the context. A common source of confusion is the frequent interchangeable use of three separate concepts: genealogical ancestry, genetic ancestry, and genetic similarity.\n\n\nGenealogical Ancestry refers to the identifiable ancestors in a person’s family tree defines as an individual’s pedigree. It is typically quantified based on lineage, with ancestry categories assigned according to cultural, geographical, or other identity-based labels. However, due to limited records, knowledge of distant ancestors is often incomplete.\nThis structure can be visualized as a graph (see figure 1, diagram A), with nodes representing ancestors and edges indicating parent-child relationships.\n\n\n\nGenetic Ancestry represents the subset of genealogical ancestry from whom an individual has inherited DNA (see figure 1, diagram B). Since only half of a parent’s DNA is passed to offspring each generation, genetic ancestry includes only a fraction of genealogical ancestors.\nIt is mapped through an ancestral recombination graph (ARG) (see figure 1, diagram C), which tracks the genetic material inherited and highlights which ancestors contributed to an individual’s genome.\n\n\n\nGenetic Similarity describes the degree to which individuals share genetic material, regardless of direct inheritance. It arises from common ancestry, population history, migration, and evolutionary factors. Beyond lineage and inheritance, genetic similarity helps analyze broader connections among individuals or groups, often used in population genetics and ancestry estimations."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "Genomics 101",
+    "objectID": "genetic_ancestry.html#visualizing-ancestry",
+    "href": "genetic_ancestry.html#visualizing-ancestry",
+    "title": "Genetic Ancestry",
+    "section": "Visualizing Ancestry",
+    "text": "Visualizing Ancestry\nTo better understand the distinctions between genealogical and genetic ancestry, the following diagram presents different representations:\n\n\n\n\n\n\nFigure 1\n\n\n\n\nDiagram A: Pedigree of a Single Individual: This shows a traditional family tree, where each node represents an ancestor and edges denote parent-child relationships. Certain ancestors are marked with colored circles, indicating that they belong to specific ancestry categories. This diagram represents genealogical ancestry, which includes all ancestors, regardless of whether their DNA was inherited.\nDiagram B: Genetic Ancestry at a Single Genomic Position: Unlike the pedigree, which includes all ancestors, genetic ancestry follows specific paths through the pedigree. The red and blue lines highlight two paths through which genetic material at a particular position in the genome has been inherited, illustrating how only a subset of genealogical ancestors contribute to an individual’s DNA.\nDiagram C: Ancestral Recombination Graph (ARG) for a Single Individual: This structure traces the actual genetic inheritance by combining different genomic positions. It shows recombination events (where genetic material from different ancestors mixes) and coalescence events (where lineages converge). Unlike the full pedigree, the ARG only includes ancestors from whom genetic material was inherited.\nDiagram D: Merged ARG for Multiple Individuals: This expands on the concept in C by merging ARGs from multiple individuals, showing how their genetic ancestry interconnects. This representation is crucial in population genetics for understanding shared ancestry and genetic relationships among individuals.\n\nBy analyzing these connections, we can gain insights into population structure, or how genetic variation is distributed among groups. However, to explore population structure in more detail, we also use statistical tools that help quantify genetic differences and relationships within and between populations. These methods will be explored further in the next section.\n\nReferences\n\nMathieson I, Scally A (2020) What is ancestry? PLoS Genet 16(3): e1008624. https://doi.org/10.1371/journal.pgen.1008624"
+  },
+  {
+    "objectID": "statistical_challenges.html",
+    "href": "statistical_challenges.html",
+    "title": "Working with Genetic Data: Statistical Challenges",
     "section": "",
-    "text": "What is genomics?\n\n\n\nGenomics is the study of all of a person’s genes (the genome), including interactions of those genes with each other and with the person’s environment. - National Insitute of Health (NHI)\nBefore we jump into the world of statistical genetics, here is a brief brief introduction to genetics—what DNA is, how it works, and why it matters."
+    "text": "Observational data → confounding → “inflation” and omitted variable bias maybe: - Adjusting for population structure in GWAS - Choosing # PCs (helpful plots)"
   },
   {
-    "objectID": "about.html#what-is-dna",
-    "href": "about.html#what-is-dna",
-    "title": "Genomics 101",
-    "section": "What is DNA?",
-    "text": "What is DNA?\n\n\n\nDeoxyribonucleic acid (DNA) is the chemical compound that contains the instructions needed to develop and direct the activities of nearly all living organisms. DNA molecules are made of two twisting, paired strands, often referred to as a double helix. Each DNA strand is made of four chemical units, called nucleotide bases, which comprise the genetic “alphabet.” The bases are adenine (A), thymine (T), guanine (G), and cytosine (C). Bases on opposite strands pair specifically: an A always pairs with a T; a C always pairs with a G. The order of the As, Ts, Cs, and Gs determines the meaning of the information encoded in that part of the DNA molecule."
+    "objectID": "gwas_methods.html",
+    "href": "gwas_methods.html",
+    "title": "GWAS Methods",
+    "section": "",
+    "text": "An alternative to the \\(p &gt; n\\) when fitting a multiple linear regression model for conducting GWAS is a marginal regression"
   },
   {
-    "objectID": "about.html#what-is-a-genome",
-    "href": "about.html#what-is-a-genome",
-    "title": "Genomics 101",
-    "section": "What is a genome?",
-    "text": "What is a genome?\n\nA genome is an organism’s complete set of DNA. Virtually every single cell in the body contains a complete copy of the approximately 3 billion DNA base pairs that make up the human genome.\n\n\nDNA contains the information needed to build the entire human body. A gene traditionally refers to the unit of DNA that carries the instructions for making a specific protein or set of proteins.\n\n\nLocated on 23 pairs of chromosomes packed into the nucleus of a human cell, genes direct the production of proteins with the assistance of enzymes and messenger molecules. Specifically, an enzyme copies the information in a gene’s DNA into a molecule called messenger ribonucleic acid (mRNA). The mRNA travels out of the nucleus and into the cell’s cytoplasm, where the mRNA is read by a tiny molecular machine called a ribosome, and the information is used to link together small molecules called amino acids in the right order to form a specific protein.\n\n\n\nProteins make up body structures like organs and tissue, as well as control chemical reactions and carry signals between cells. If a cell’s DNA is mutated, an abnormal protein may be produced, which can disrupt the body’s usual processes and lead to a disease such as cancer."
+    "objectID": "gwas_methods.html#marginal-regression-approach",
+    "href": "gwas_methods.html#marginal-regression-approach",
+    "title": "GWAS Methods",
+    "section": "Marginal Regression Approach",
+    "text": "Marginal Regression Approach\n\\[\nE[y | x_j] = \\beta_0 + \\beta_{1j} x_j\n\\]\nwhere:\n\n\\(y\\) is the trait,\n\\(x_j\\) is the number of minor alleles at position \\(j\\),\nThis is repeated for all positions \\(j = 1, \\dots, m\\).\n\nWith this approach we analyze all predictor variables one-by-one, and based on this we can conduct hypothesis testing.\n\n\n\n\n\n\nNote!\n\n\n\nThere are other types of hypothesis test that could be conducted (i.e.trend test, genotypic test) but they all rely on the a similar idea of testing the association between each SNP and the disease/trait, recording the p-value, and repeating for all SNPs"
   },
   {
-    "objectID": "about.html#what-is-dna-sequencing",
-    "href": "about.html#what-is-dna-sequencing",
-    "title": "Genomics 101",
-    "section": "What is DNA sequencing?",
-    "text": "What is DNA sequencing?\n\nResearchers can use DNA sequencing to search for genetic variations and/or mutations that may play a role in the development or progression of a disease. The disease-causing change may be as small as the substitution, deletion, or addition of a single base pair or as large as a deletion of thousands of bases.\n\n\nSequencing determines the exact order of bases in DNA. Since A always pairs with a T; a C always pairs with a G; only one strand needs to be reported.\n\n\nSequencing by synthesis is the most common method. It uses DNA polymerase (the enzyme in cells that synthesizes DNA) to generate a new strand of DNA from a strand of interest. Tagged nucleotides emit fluorescent signals when added, allowing detection of their sequence. This method produces billions of short reads (about 125 bases each).\n\n\nTo assemble the sequence of all the bases in a large piece of DNA such as a gene, researchers need to read the sequence of overlapping segments. This allows the longer sequence to be assembled from shorter pieces. Each base is read multiple times to ensure accuracy."
+    "objectID": "gwas_methods.html#hypothesis-testing",
+    "href": "gwas_methods.html#hypothesis-testing",
+    "title": "GWAS Methods",
+    "section": "Hypothesis Testing",
+    "text": "Hypothesis Testing\nThe goal of hypothesis testing is to discern between two potential theories. For a regression model we test:\n\nNull hypothesis (H0): meaning our predictor has/causes no effect/relationship/difference on our outcome variable \\[H_0: ꞵ1_j = 0 \\]\n\nAlternative hypothesis (HA): when our predictor has/causes an effect/relationship/difference. \\[H_1: ꞵ_1j ≠ 0\\]\n\nTo perform this test we must:\n\nState the hypotheses\nSelect a significance threshold\nCalculate a test statistic\nCalculate the corresponding p-value\nMake a decision (reject \\(H_0\\) if p-value \\(\\leq \\alpha\\), fail to reject \\(H_0\\) if p-value \\(&gt; \\alpha\\) )\n\nNow that we know how to perform a hypothesis test, it’s important to consider the potential errors that can arise from this process\n\nErrors\nIn hypothesis testing, \\(\\alpha\\) represents the significance level, which is the probability of rejecting the null hypothesis when it is actually true. We call this a type I error. Therefore, we choose \\(\\alpha\\) based on how comfortable we are with making a T1E. See below the different scenarios after we have made a decision about our test:\n\nBack to our original question: what SNPs are associated with a specific disease/trait of interest? It can be difficult to keep track of our results when we have hundreds of thousands of p-values to keep track of, this is where Manhattan plots come in!"
   },
   {
-    "objectID": "about.html#why-is-it-important",
-    "href": "about.html#why-is-it-important",
-    "title": "Genomics 101",
-    "section": "Why is it important?",
-    "text": "Why is it important?\n\nThe study of genomics is essential for advancing healthcare. Since genetics interacts with factors like diet and lifestyle, understanding it provides deeper insights into disease mechanisms. It has expanded our understanding of complex diseases like cancer, diabetes, and cardiovascular disease, leading to improved diagnostics and treatment strategies. Genomics is also used in agriculture, forensic science, ancestry testing, etc."
+    "objectID": "gwas_methods.html#manhattan-plots",
+    "href": "gwas_methods.html#manhattan-plots",
+    "title": "GWAS Methods",
+    "section": "Manhattan Plots",
+    "text": "Manhattan Plots\nTo make sense of the vast number of p-values generated in a GWAS, we need a clear and interpretable way to visualize our results. Manhattan plots provide an intuitive way to identify genetic variants (SNPs) that are significantly associated with a trait by displaying p-values across the genome in a structured format. Below is an example of a Manhattan plot:\n\n\n\nContinue to the next section GWAS Implementation to learn more about how you can conduct a GWAS and create your own Manhattan plot!"
   },
   {
-    "objectID": "about.html#references",
-    "href": "about.html#references",
-    "title": "Genomics 101",
+    "objectID": "ethical_challenges.html",
+    "href": "ethical_challenges.html",
+    "title": "Ethical Challenges in Genetics Research",
+    "section": "",
+    "text": "Researchers use human genetic information to address a variety of questions about human history and evolution, human biology, diseases, and heritable traits (e.g., height or serum cholesterol).\nHowever, as genetic and genomic information become more accessible the increased use of human genetic data in research across different disciplines raises ethical concerns, particularly regarding the use of population descriptors.\nWhile these descriptors have historically been used as shorthand for the complex patterns of human genetic variation shaped by history, migration, and evolution, their broad and growing use in genomic research calls for clearer guidelines on their use."
+  },
+  {
+    "objectID": "ethical_challenges.html#race-and-etnicity-as-population-descriptors",
+    "href": "ethical_challenges.html#race-and-etnicity-as-population-descriptors",
+    "title": "Ethical Challenges in Genetics Research",
+    "section": "Race and Etnicity as Population Descriptors",
+    "text": "Race and Etnicity as Population Descriptors\nIn humans, race has a long history of being incorrectly identified as the major genetic reason for phenotypic differences between groups, when in reality race is a socially constructed designation.\nAs a result, the misconception that human beings can be naturally divided into biologically distinguishable races has become embedded in scientific research, medical practice and technologies, and formal education.\nRather, the structure of genetic variation results from repeated human population mixing and movements across time, and no single variable fully represents this complexity."
+  },
+  {
+    "objectID": "ethical_challenges.html#other-descriptors",
+    "href": "ethical_challenges.html#other-descriptors",
+    "title": "Ethical Challenges in Genetics Research",
+    "section": "Other descriptors",
+    "text": "Other descriptors\nOther population descriptors used by researchers to categorize human populations include geographic ancestry, linguistic groups, and genetic clusters based on shared variants. These descriptors can provide valuable insights but also reinforce misleading or simplistic categorizations. For example, geographic labels may not fully capture historical migration patterns."
+  },
+  {
+    "objectID": "ethical_challenges.html#takeaways",
+    "href": "ethical_challenges.html#takeaways",
+    "title": "Ethical Challenges in Genetics Research",
+    "section": "Takeaways",
+    "text": "Takeaways\n\nMisrepresenting race as a genetic category can lead to flawed scientific conclusions, reinforce racial biases, and perpetuate health disparities.\nNo single descriptor fully captures human genetic diversity, and oversimplified labels can obscure the true complexity of ancestry and population structure.\nPoorly defined categories can lead to inaccurate medical diagnoses, ineffective treatments, and misinterpretations in research, particularly in genetics and biomedical sciences.\nClear guidelines are necessary to ensure ethical and accurate research. Researchers must use precise, context-appropriate descriptors to improve scientific integrity and expand the relevance of genetic studies across diverse populations."
+  },
+  {
+    "objectID": "ethical_challenges.html#references",
+    "href": "ethical_challenges.html#references",
+    "title": "Ethical Challenges in Genetics Research",
     "section": "References",
-    "text": "References\n\nNational Human Genome Research Institute. A brief guide to genomics. Genome.gov. Retrieved [date], from https://www.genome.gov/about-genomics/fact-sheets/A-Brief-Guide-to-Genomics\nAmerican Society of Human Genetics. Building blocks of genetics. Retrieved [date], from https://www.ashg.org/discover-genetics/building-blocks/"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome!",
-    "section": "",
-    "text": "This website was created by Maria Sanchez Linares and presents a summary of what I have learned in my Statistical Genetics course!"
-  },
-  {
-    "objectID": "index.html#section",
-    "href": "index.html#section",
-    "title": "Welcome!",
-    "section": "",
-    "text": "Here I will walk you through an introduction to genetics background, how to conduct a genome-wide association study in R, multiple testing, genetic ancestry and some of the ethics behind statistical genetics.\nI recommend following along in the order the tabs are presented in the navigation bar."
+    "text": "References\nNational Academies of Sciences, Engineering, and Medicine. 2023. Using Population Descriptors in Genetics and Genomics Research: A New Framework for an Evolving Field. Washington, DC: The National Academies Press. https://doi.org/10.17226/26902."
   },
   {
     "objectID": "gwas_implementation.html",
@@ -112,32 +133,60 @@
     "text": "Visualizing Results: Manhattan Plots\nWe will use the qqman package to create a Manhattan plot and visualize our genome-wide association results.\n\n# Identify genome-wide significant SNPs\nsig.snps &lt;- all.results %&gt;%\n  filter(P.Value &lt; 5e-08) %&gt;% \n  pull(snp.name)\n\nError: object 'all.results' not found\n\n# Generate Manhattan plot\nmanhattan(all.results, \n          chr = \"chromosome\", \n          bp = \"position\", \n          p = \"P.Value\", \n          snp = \"snp.name\", \n          ylim = c(0, 10),\n          col = c('darkblue', 'lightblue'),  # change color scheme\n          highlight = sig.snps,          # Highlight significant SNPs\n          genomewideline = -log10(5e-07),# Adjust genome-wide line, we will see how to determine this indicator in future steps \n          main = \"Manhattan Plot of GWAS Results\")\n\nError: object 'all.results' not found\n\n\nWe can also created a zoomed-in view for Chromosome 2 to get a closer look at the most significant SNPs\n\n# Zoom into chromosome 1 with annotations\nmanhattan(subset(all.results, chromosome == 1), \n          chr = \"chromosome\", \n          bp = \"position\", \n          p = \"P.Value\", \n          snp = \"snp.name\", \n          ylim = c(0, 20),\n          annotatePval = 5e-10, \n          annotateTop = FALSE,\n          main = \"Zoomed-in View: Chromosome 1\")\n\nError in manhattan(subset(all.results, chromosome == 1), chr = \"chromosome\", : Column P.Value not found!\n\n\n\n\n\n\n\n\nNote\n\n\n\nUnderstanding the Y-Axis in a Manhattan Plot\nThe y-axis in a Manhattan plot represents the statistical significance of each SNP’s association with the trait of interest. It is plotted as \\(-\\log_{10}(p\\text{-value})\\), meaning:\n\nHigher points indicate stronger evidence that the SNP is associated with the trait.\n\nA low p-value (e.g., \\(10^{-8}\\)) translates to a high \\(-\\log_{10}(p\\text{-value})\\) value (e.g., 8), making it more noticeable in the plot."
   },
   {
-    "objectID": "gwas_methods.html",
-    "href": "gwas_methods.html",
-    "title": "GWAS Methods",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome!",
     "section": "",
-    "text": "An alternative to the \\(p &gt; n\\) when fitting a multiple linear regression model for conducting GWAS is a marginal regression"
+    "text": "This website was created by Maria Sanchez Linares and presents a summary of what I have learned in my Statistical Genetics course!"
   },
   {
-    "objectID": "gwas_methods.html#marginal-regression-approach",
-    "href": "gwas_methods.html#marginal-regression-approach",
-    "title": "GWAS Methods",
-    "section": "Marginal Regression Approach",
-    "text": "Marginal Regression Approach\n\\[\nE[y | x_j] = \\beta_0 + \\beta_{1j} x_j\n\\]\nwhere:\n\n\\(y\\) is the trait,\n\\(x_j\\) is the number of minor alleles at position \\(j\\),\nThis is repeated for all positions \\(j = 1, \\dots, m\\).\n\nWith this approach we analyze all predictor variables one-by-one, and based on this we can conduct hypothesis testing.\n\n\n\n\n\n\nNote!\n\n\n\nThere are other types of hypothesis test that could be conducted (i.e.trend test, genotypic test) but they all rely on the a similar idea of testing the association between each SNP and the disease/trait, recording the p-value, and repeating for all SNPs"
+    "objectID": "index.html#section",
+    "href": "index.html#section",
+    "title": "Welcome!",
+    "section": "",
+    "text": "Here I will walk you through an introduction to genetics background, how to conduct a genome-wide association study in R, multiple testing, genetic ancestry and some of the ethics behind statistical genetics.\nI recommend following along in the order the tabs are presented in the navigation bar."
   },
   {
-    "objectID": "gwas_methods.html#hypothesis-testing",
-    "href": "gwas_methods.html#hypothesis-testing",
-    "title": "GWAS Methods",
-    "section": "Hypothesis Testing",
-    "text": "Hypothesis Testing\nThe goal of hypothesis testing is to discern between two potential theories. For a regression model we test:\n\nNull hypothesis (H0): meaning our predictor has/causes no effect/relationship/difference on our outcome variable \\[H_0: ꞵ1_j = 0 \\]\n\nAlternative hypothesis (HA): when our predictor has/causes an effect/relationship/difference. \\[H_1: ꞵ_1j ≠ 0\\]\n\nTo perform this test we must:\n\nState the hypotheses\nSelect a significance threshold\nCalculate a test statistic\nCalculate the corresponding p-value\nMake a decision (reject \\(H_0\\) if p-value \\(\\leq \\alpha\\), fail to reject \\(H_0\\) if p-value \\(&gt; \\alpha\\) )\n\nNow that we know how to perform a hypothesis test, it’s important to consider the potential errors that can arise from this process\n\nErrors\nIn hypothesis testing, \\(\\alpha\\) represents the significance level, which is the probability of rejecting the null hypothesis when it is actually true. We call this a type I error. Therefore, we choose \\(\\alpha\\) based on how comfortable we are with making a T1E. See below the different scenarios after we have made a decision about our test:\n\nBack to our original question: what SNPs are associated with a specific disease/trait of interest? It can be difficult to keep track of our results when we have hundreds of thousands of p-values to keep track of, this is where Manhattan plots come in!"
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Genomics 101",
+    "section": "",
+    "text": "What is genomics?\n\n\n\nGenomics is the study of all of a person’s genes (the genome), including interactions of those genes with each other and with the person’s environment. - National Insitute of Health (NHI)\nBefore we jump into the world of statistical genetics, here is a brief brief introduction to genetics—what DNA is, how it works, and why it matters."
   },
   {
-    "objectID": "gwas_methods.html#manhattan-plots",
-    "href": "gwas_methods.html#manhattan-plots",
-    "title": "GWAS Methods",
-    "section": "Manhattan Plots",
-    "text": "Manhattan Plots\nTo make sense of the vast number of p-values generated in a GWAS, we need a clear and interpretable way to visualize our results. Manhattan plots provide an intuitive way to identify genetic variants (SNPs) that are significantly associated with a trait by displaying p-values across the genome in a structured format. Below is an example of a Manhattan plot:\n\n\n\nContinue to the next section GWAS Implementation to learn more about how you can conduct a GWAS and create your own Manhattan plot!"
+    "objectID": "about.html#what-is-dna",
+    "href": "about.html#what-is-dna",
+    "title": "Genomics 101",
+    "section": "What is DNA?",
+    "text": "What is DNA?\n\n\n\nDeoxyribonucleic acid (DNA) is the chemical compound that contains the instructions needed to develop and direct the activities of nearly all living organisms. DNA molecules are made of two twisting, paired strands, often referred to as a double helix. Each DNA strand is made of four chemical units, called nucleotide bases, which comprise the genetic “alphabet.” The bases are adenine (A), thymine (T), guanine (G), and cytosine (C). Bases on opposite strands pair specifically: an A always pairs with a T; a C always pairs with a G. The order of the As, Ts, Cs, and Gs determines the meaning of the information encoded in that part of the DNA molecule."
+  },
+  {
+    "objectID": "about.html#what-is-a-genome",
+    "href": "about.html#what-is-a-genome",
+    "title": "Genomics 101",
+    "section": "What is a genome?",
+    "text": "What is a genome?\n\nA genome is an organism’s complete set of DNA. Virtually every single cell in the body contains a complete copy of the approximately 3 billion DNA base pairs that make up the human genome.\n\n\nDNA contains the information needed to build the entire human body. A gene traditionally refers to the unit of DNA that carries the instructions for making a specific protein or set of proteins.\n\n\nLocated on 23 pairs of chromosomes packed into the nucleus of a human cell, genes direct the production of proteins with the assistance of enzymes and messenger molecules. Specifically, an enzyme copies the information in a gene’s DNA into a molecule called messenger ribonucleic acid (mRNA). The mRNA travels out of the nucleus and into the cell’s cytoplasm, where the mRNA is read by a tiny molecular machine called a ribosome, and the information is used to link together small molecules called amino acids in the right order to form a specific protein.\n\n\n\nProteins make up body structures like organs and tissue, as well as control chemical reactions and carry signals between cells. If a cell’s DNA is mutated, an abnormal protein may be produced, which can disrupt the body’s usual processes and lead to a disease such as cancer."
+  },
+  {
+    "objectID": "about.html#what-is-dna-sequencing",
+    "href": "about.html#what-is-dna-sequencing",
+    "title": "Genomics 101",
+    "section": "What is DNA sequencing?",
+    "text": "What is DNA sequencing?\n\nResearchers can use DNA sequencing to search for genetic variations and/or mutations that may play a role in the development or progression of a disease. The disease-causing change may be as small as the substitution, deletion, or addition of a single base pair or as large as a deletion of thousands of bases.\n\n\nSequencing determines the exact order of bases in DNA. Since A always pairs with a T; a C always pairs with a G; only one strand needs to be reported.\n\n\nSequencing by synthesis is the most common method. It uses DNA polymerase (the enzyme in cells that synthesizes DNA) to generate a new strand of DNA from a strand of interest. Tagged nucleotides emit fluorescent signals when added, allowing detection of their sequence. This method produces billions of short reads (about 125 bases each).\n\n\nTo assemble the sequence of all the bases in a large piece of DNA such as a gene, researchers need to read the sequence of overlapping segments. This allows the longer sequence to be assembled from shorter pieces. Each base is read multiple times to ensure accuracy."
+  },
+  {
+    "objectID": "about.html#why-is-it-important",
+    "href": "about.html#why-is-it-important",
+    "title": "Genomics 101",
+    "section": "Why is it important?",
+    "text": "Why is it important?\n\nThe study of genomics is essential for advancing healthcare. Since genetics interacts with factors like diet and lifestyle, understanding it provides deeper insights into disease mechanisms. It has expanded our understanding of complex diseases like cancer, diabetes, and cardiovascular disease, leading to improved diagnostics and treatment strategies. Genomics is also used in agriculture, forensic science, ancestry testing, etc."
+  },
+  {
+    "objectID": "about.html#references",
+    "href": "about.html#references",
+    "title": "Genomics 101",
+    "section": "References",
+    "text": "References\n\nNational Human Genome Research Institute. A brief guide to genomics. Genome.gov. Retrieved [date], from https://www.genome.gov/about-genomics/fact-sheets/A-Brief-Guide-to-Genomics\nAmerican Society of Human Genetics. Building blocks of genetics. Retrieved [date], from https://www.ashg.org/discover-genetics/building-blocks/"
   },
   {
     "objectID": "gwas_intro.html",
