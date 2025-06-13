@@ -20,18 +20,10 @@ website:
             text: GWAS Implementation
       - href: multiple_testing.qmd 
         text: Multiple Testing  
-      - text: Genetic Ancestry
-        menu: 
-          - href: genetic_ancestry.qmd
-            text: What is Ancestry?
-          - href: population_structure.qmd
-            text: Population Structure
-      - text: Data Challenges
-        menu: 
-          - href: statistical_challenges.qmd
-            text: Statistical Challenges
-          - href: ethical_challenges.qmd
-            text: Ethical Challenges 
+      - href: genetic_ancestry.qmd
+        text: What is Ancestry?
+      - href: ethical_challenges.qmd
+        text: Data Challenges
         
   page-footer:
     left: |
